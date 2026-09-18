@@ -3,6 +3,13 @@
   <groupId>powerDown</groupId>
   <artifactId>powerDown</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <dependencies>
+  	<dependency>
+	<groupId>com.mysql</groupId>
+	<artifactId>mysql-connector-j</artifactId>
+	<version>9.1.0</version>
+	</dependency>
+</dependencies>
   <name>PowerDown</name>
   <description>Videogame about unplugging appliances in stranger's houses.
 </description>
