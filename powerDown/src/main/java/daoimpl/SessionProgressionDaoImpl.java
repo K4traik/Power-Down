@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class SessionProgressionDaoImpl implements SessionProgressionDao{
 	private final String url = "jdbc:mysql://localhost:3306/Power_Down?useSSL=false&serverTimezone=UTC";
@@ -40,6 +41,10 @@ public class SessionProgressionDaoImpl implements SessionProgressionDao{
 		}catch(SQLException ex) {
 			ex.printStackTrace();
 		}
+		return null;
+	}
+	@Override
+	public ArrayList<SessionProgression> readAll(){
 		return null;
 	}
 	@Override
