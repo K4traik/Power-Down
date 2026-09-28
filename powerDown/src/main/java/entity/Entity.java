@@ -1,5 +1,7 @@
 package entity;
 
+import components.Position;
+
 public abstract class Entity {
 	protected Position position;
 	
