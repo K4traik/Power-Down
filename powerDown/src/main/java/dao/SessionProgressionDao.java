@@ -1,9 +1,12 @@
 package dao;
 
+import java.util.ArrayList;
+import model.SessionProgression;
+
 public interface SessionProgressionDao {
-	void guardar(SessionProgression s);
-    SessionProgression buscarPorId(int id);
-    SessionProgression[] obtenerTodos();
-    void actualizar(SessionProgression s);
-    void eliminar(SessionProgression s);
+	public void create(SessionProgression s);
+	public SessionProgression read(int id);
+	public ArrayList<SessionProgression> readAll();
+	public void update(SessionProgression s);
+	public void delete(int id);
 }

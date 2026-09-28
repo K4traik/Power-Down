@@ -1,28 +1,37 @@
 package model;
 
 public class SessionProgression {
-	public int id;
-    private int currentLevel;
-
-    public int getId() {
-        return id;
-    }
-
-    public int getCurrentLevel() {
-        return currentLevel;
-    }
-
-	public void save(SessionProgression s) {
+	private int id;
+	private int currentLevel;
+	private boolean active;
+	
+	public SessionProgression(int id, int currentLevel) {
+		this.setId(id);
+		this.setCurrentLevel(currentLevel);
+		this.setActive(true);
+	}
+	public SessionProgression(int id, int currentLevel, boolean active) {
+		this.setId(id);
+		this.setCurrentLevel(currentLevel);
+		this.setActive(active);
 	}
 
-	public void racharge(SessionProgression s) {
+	public int getId() {
+		return id;
 	}
-
-	public void delete(SessionProgression s) {
+	public void setId(int id) {
+		this.id = id;
 	}
-
-	public SessionProgression[] getall() {
-		// TODO Auto-generated method stub
-		return null;
+	public int getCurrentLevel() {
+		return currentLevel;
+	}
+	public void setCurrentLevel(int currentLevel) {
+		this.currentLevel = currentLevel;
+	}
+	public boolean isActive() {
+		return active;
+	}
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 }
