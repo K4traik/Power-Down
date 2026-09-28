@@ -1,5 +1,7 @@
 package map;
 
+import components.Position;
+
 public class Map {
 	private ArrayList <Position> positions;
 	

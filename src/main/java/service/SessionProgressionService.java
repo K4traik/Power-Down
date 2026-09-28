@@ -1,19 +1,20 @@
 package service;
 
+import model.SessionProgression;
+
 public class SessionProgressionService {
-	private SessionProgression partidaGuardada;
+	
+	private SessionProgression saveGame;
 
     public void saveGame(SessionProgression s) {
-        this.partidaGuardada = s;
-        System.out.println("Partida guardada con éxito en el nivel " + s.currentLevel);
+        this.saveGame = s;
     }
 
     public SessionProgression rachargeGame() {
-        return this.partidaGuardada;
+        return this.saveGame;
     }
 
     public void deleteGame() {
-        this.partidaGuardada = null;
-        System.out.println("Partida eliminada.");
+        this.saveGame = null;
     }
 }
