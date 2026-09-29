@@ -19,4 +19,20 @@ public abstract class Appliance extends Entity{
 		this.active = false;
 	}
 	
+	public boolean isActive() {
+	    return active;
+	}
+
+	public void setActive(boolean active) {
+	    this.active = active;
+	}
+
+	public int getFacing() {
+	    return facing;
+	}
+
+	public void setFacing(int facing) {
+	    this.facing = facing;
+	}
+	
 }

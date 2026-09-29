@@ -1,7 +1,10 @@
 package levelmanager;
 
 import entity.Human;
+import entity.Wires;
 import map.Map;
+import interfaces.Actionable;
+import java.util.ArrayList;
 
 public class LevelManager{
 	private int currentLevel;

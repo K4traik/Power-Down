@@ -7,6 +7,15 @@ public class Human extends Entity{
 		this.health=health;
 	}
 	
-	public void damage() {
-	}
+	public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+   public void damage() {
+        this.health = this.health - 10;
+}
 }
