@@ -10,13 +10,21 @@ public abstract class Appliance extends Entity{
 	}
 	
 	public void logicMoved() {
+		
 	}
-	
 	public void leaveWires() {	
+		
 	}
-	
+	public boolean isActive() {
+		return active;
+	}
 	public void turnOff() {
 		this.active = false;
 	}
-	
+	public int getFacing() {
+		return facing;
+	}
+	public void setFacing(int facing) {
+		this.facing = facing;
+	}
 }
