@@ -18,16 +18,24 @@ public class Human extends Entity{
 	public void setHealth(int health) {
 		this.health = health;
 	}
-	public void walkNorth() {
-		move(new Position(getPosition().x, getPosition().y++));
+	public Position walkNorth() {
+		Position p = getPosition();
+		p.y = p.y + 1;
+		return p;
 	}
-	public void walkSouth() {
-		move(new Position(getPosition().x, getPosition().y--));
+	public Position walkSouth() {
+		Position p = getPosition();
+		p.y = p.y - 1;
+		return p;
 	}
-	public void walkEast() {
-		move(new Position(getPosition().x++, getPosition().y));
+	public Position walkEast() {
+		Position p = getPosition();
+		p.x = p.x + 1;
+		return p;
 	}
-	public void walkWest() {
-		move(new Position(getPosition().x--, getPosition().y));
+	public Position walkWest() {
+		Position p = getPosition();
+		p.x = p.x - 1;
+		return p;
 	}
 }

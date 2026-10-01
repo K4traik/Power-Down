@@ -1,10 +1,4 @@
-/daoimpl/
+/META-INF/
+/levelmanager/
 /entity/
 /exceptions/
-/interfaces/
-/levelmanager/
-/map/
-/model/
-/service/
-/META-INF/
-/components/
