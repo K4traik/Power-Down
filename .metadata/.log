@@ -1835,3 +1835,153 @@ Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp
 
 !ENTRY org.eclipse.e4.ui.css.swt.theme 2 0 2026-09-30 23:26:17.710
 !MESSAGE Theme 'org.eclipse.e4.ui.css.theme.high-contrast' not found; using OS high contrast colors.
+!SESSION 2026-10-03 20:40:09.251 -----------------------------------------------
+eclipse.buildId=4.41.0.20260903-0719
+java.version=25.0.4.1
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=es_ES
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY ch.qos.logback.classic 1 0 2026-10-03 20:40:23.922
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2026-10-03 20:40:42.471
+!MESSAGE Logback config file: /home/k4traik/Github Repositories/Power-Down/.metadata/.plugins/org.eclipse.m2e.logback/logback.2.7.201.20260831-2044.xml
+
+!ENTRY org.eclipse.e4.ui.css.swt.theme 2 0 2026-10-03 20:40:47.487
+!MESSAGE Theme 'org.eclipse.e4.ui.css.theme.high-contrast' not found; using OS high contrast colors.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2026-10-03 20:43:44.034
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2026-10-03 20:43:44.058
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2026-10-03 20:43:45.443
+!MESSAGE Plugin is modifying compileSourceRoots through clear(), which will not work in Maven 4.0.0. Use MavenProject.addCompileSourceRoot()/removeCompileSourceRoot() methods instead. If using a plugin, please upgrade to the latest version or report the issue to the plugin maintainer. To disable these warnings, set -Dmaven.project.sourceRoots.warningsDisabled=true on the command line, in the .mvn/maven.config file, or in project POM properties.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2026-10-03 20:43:45.446
+!MESSAGE Plugin is modifying compileSourceRoots through add(), which will not work in Maven 4.0.0. Use MavenProject.addCompileSourceRoot()/removeCompileSourceRoot() methods instead. If using a plugin, please upgrade to the latest version or report the issue to the plugin maintainer. To disable these warnings, set -Dmaven.project.sourceRoots.warningsDisabled=true on the command line, in the .mvn/maven.config file, or in project POM properties.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2026-10-03 20:43:45.447
+!MESSAGE Plugin is modifying testCompileSourceRoots through clear(), which will not work in Maven 4.0.0. Use MavenProject.addTestCompileSourceRoot()/removeTestCompileSourceRoot() methods instead. If using a plugin, please upgrade to the latest version or report the issue to the plugin maintainer. To disable these warnings, set -Dmaven.project.sourceRoots.warningsDisabled=true on the command line, in the .mvn/maven.config file, or in project POM properties.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2026-10-03 20:43:45.447
+!MESSAGE Plugin is modifying testCompileSourceRoots through add(), which will not work in Maven 4.0.0. Use MavenProject.addTestCompileSourceRoot()/removeTestCompileSourceRoot() methods instead. If using a plugin, please upgrade to the latest version or report the issue to the plugin maintainer. To disable these warnings, set -Dmaven.project.sourceRoots.warningsDisabled=true on the command line, in the .mvn/maven.config file, or in project POM properties.
+
+!ENTRY org.eclipse.core.resources 2 10035 2026-10-03 20:43:47.318
+!MESSAGE The workspace will exit with unsaved changes in this session.
+!SESSION 2026-10-30 00:32:05.725 -----------------------------------------------
+eclipse.buildId=4.41.0.20260903-0719
+java.version=25.0.4.1
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=es_ES
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY ch.qos.logback.classic 1 0 2026-10-30 00:32:22.233
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY org.eclipse.core.resources 2 10035 2026-10-30 00:32:40.418
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY ch.qos.logback.classic 1 0 2026-10-30 00:32:42.982
+!MESSAGE Logback config file: /home/k4traik/Github Repositories/Power-Down/.metadata/.plugins/org.eclipse.m2e.logback/logback.2.7.201.20260831-2044.xml
+
+!ENTRY org.eclipse.e4.ui.css.swt.theme 2 0 2026-10-30 00:32:48.992
+!MESSAGE Theme 'org.eclipse.e4.ui.css.theme.high-contrast' not found; using OS high contrast colors.
+
+!ENTRY org.eclipse.egit.core 4 0 2026-10-30 00:40:03.078
+!MESSAGE Pulling 1 repository
+!SUBENTRY 1 org.eclipse.egit.core 4 0 2026-10-30 00:40:03.078
+!MESSAGE Checkout conflict with files: 
+powerDown/target/classes/META-INF/maven/powerDown/powerDown/pom.properties
+!STACK 0
+org.eclipse.jgit.api.errors.CheckoutConflictException: Checkout conflict with files: 
+powerDown/target/classes/META-INF/maven/powerDown/powerDown/pom.properties
+	at org.eclipse.jgit.api.MergeCommand.call(MergeCommand.java:425)
+	at org.eclipse.jgit.api.PullCommand.call(PullCommand.java:383)
+	at org.eclipse.egit.core.op.PullOperation$PullJob.run(PullOperation.java:256)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: org.eclipse.jgit.errors.CheckoutConflictException: Checkout conflict with files: 
+powerDown/target/classes/META-INF/maven/powerDown/powerDown/pom.properties
+	at org.eclipse.jgit.dircache.DirCacheCheckout.doCheckout(DirCacheCheckout.java:529)
+	at org.eclipse.jgit.dircache.DirCacheCheckout.checkout(DirCacheCheckout.java:493)
+	at org.eclipse.jgit.api.MergeCommand.call(MergeCommand.java:291)
+	... 3 more
+
+!ENTRY org.eclipse.egit.core 4 0 2026-10-30 00:40:35.564
+!MESSAGE Pulling 1 repository
+!SUBENTRY 1 org.eclipse.egit.core 4 0 2026-10-30 00:40:35.564
+!MESSAGE Checkout conflict with files: 
+powerDown/target/classes/META-INF/maven/powerDown/powerDown/pom.properties
+!STACK 0
+org.eclipse.jgit.api.errors.CheckoutConflictException: Checkout conflict with files: 
+powerDown/target/classes/META-INF/maven/powerDown/powerDown/pom.properties
+	at org.eclipse.jgit.api.MergeCommand.call(MergeCommand.java:425)
+	at org.eclipse.jgit.api.PullCommand.call(PullCommand.java:383)
+	at org.eclipse.egit.core.op.PullOperation$PullJob.run(PullOperation.java:256)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: org.eclipse.jgit.errors.CheckoutConflictException: Checkout conflict with files: 
+powerDown/target/classes/META-INF/maven/powerDown/powerDown/pom.properties
+	at org.eclipse.jgit.dircache.DirCacheCheckout.doCheckout(DirCacheCheckout.java:529)
+	at org.eclipse.jgit.dircache.DirCacheCheckout.checkout(DirCacheCheckout.java:493)
+	at org.eclipse.jgit.api.MergeCommand.call(MergeCommand.java:291)
+	... 3 more
+
+!ENTRY org.eclipse.egit.core 4 0 2026-10-30 01:07:31.266
+!MESSAGE Pulling 1 repository
+!SUBENTRY 1 org.eclipse.egit.core 4 0 2026-10-30 01:07:31.266
+!MESSAGE Checkout conflict with files: 
+powerDown/target/classes/META-INF/maven/powerDown/powerDown/pom.properties
+!STACK 0
+org.eclipse.jgit.api.errors.CheckoutConflictException: Checkout conflict with files: 
+powerDown/target/classes/META-INF/maven/powerDown/powerDown/pom.properties
+	at org.eclipse.jgit.api.MergeCommand.call(MergeCommand.java:425)
+	at org.eclipse.jgit.api.PullCommand.call(PullCommand.java:383)
+	at org.eclipse.egit.core.op.PullOperation$PullJob.run(PullOperation.java:256)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: org.eclipse.jgit.errors.CheckoutConflictException: Checkout conflict with files: 
+powerDown/target/classes/META-INF/maven/powerDown/powerDown/pom.properties
+	at org.eclipse.jgit.dircache.DirCacheCheckout.doCheckout(DirCacheCheckout.java:529)
+	at org.eclipse.jgit.dircache.DirCacheCheckout.checkout(DirCacheCheckout.java:493)
+	at org.eclipse.jgit.api.MergeCommand.call(MergeCommand.java:291)
+	... 3 more
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2026-10-30 01:08:19.221
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2026-10-30 01:08:19.229
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2026-10-30 01:08:20.010
+!MESSAGE Plugin is modifying compileSourceRoots through clear(), which will not work in Maven 4.0.0. Use MavenProject.addCompileSourceRoot()/removeCompileSourceRoot() methods instead. If using a plugin, please upgrade to the latest version or report the issue to the plugin maintainer. To disable these warnings, set -Dmaven.project.sourceRoots.warningsDisabled=true on the command line, in the .mvn/maven.config file, or in project POM properties.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2026-10-30 01:08:20.010
+!MESSAGE Plugin is modifying compileSourceRoots through add(), which will not work in Maven 4.0.0. Use MavenProject.addCompileSourceRoot()/removeCompileSourceRoot() methods instead. If using a plugin, please upgrade to the latest version or report the issue to the plugin maintainer. To disable these warnings, set -Dmaven.project.sourceRoots.warningsDisabled=true on the command line, in the .mvn/maven.config file, or in project POM properties.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2026-10-30 01:08:20.011
+!MESSAGE Plugin is modifying testCompileSourceRoots through clear(), which will not work in Maven 4.0.0. Use MavenProject.addTestCompileSourceRoot()/removeTestCompileSourceRoot() methods instead. If using a plugin, please upgrade to the latest version or report the issue to the plugin maintainer. To disable these warnings, set -Dmaven.project.sourceRoots.warningsDisabled=true on the command line, in the .mvn/maven.config file, or in project POM properties.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2026-10-30 01:08:20.011
+!MESSAGE Plugin is modifying testCompileSourceRoots through add(), which will not work in Maven 4.0.0. Use MavenProject.addTestCompileSourceRoot()/removeTestCompileSourceRoot() methods instead. If using a plugin, please upgrade to the latest version or report the issue to the plugin maintainer. To disable these warnings, set -Dmaven.project.sourceRoots.warningsDisabled=true on the command line, in the .mvn/maven.config file, or in project POM properties.
+
+!ENTRY org.eclipse.egit.core 4 0 2026-10-30 01:09:08.980
+!MESSAGE Pulling 1 repository
+!SUBENTRY 1 org.eclipse.egit.core 4 0 2026-10-30 01:09:08.980
+!MESSAGE Checkout conflict with files: 
+powerDown/target/classes/META-INF/maven/powerDown/powerDown/pom.properties
+!STACK 0
+org.eclipse.jgit.api.errors.CheckoutConflictException: Checkout conflict with files: 
+powerDown/target/classes/META-INF/maven/powerDown/powerDown/pom.properties
+	at org.eclipse.jgit.api.MergeCommand.call(MergeCommand.java:425)
+	at org.eclipse.jgit.api.PullCommand.call(PullCommand.java:383)
+	at org.eclipse.egit.core.op.PullOperation$PullJob.run(PullOperation.java:256)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: org.eclipse.jgit.errors.CheckoutConflictException: Checkout conflict with files: 
+powerDown/target/classes/META-INF/maven/powerDown/powerDown/pom.properties
+	at org.eclipse.jgit.dircache.DirCacheCheckout.doCheckout(DirCacheCheckout.java:529)
+	at org.eclipse.jgit.dircache.DirCacheCheckout.checkout(DirCacheCheckout.java:493)
+	at org.eclipse.jgit.api.MergeCommand.call(MergeCommand.java:291)
+	... 3 more
