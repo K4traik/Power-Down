@@ -1,11 +1,2 @@
 /META-INF/
-/dao/
-/daoimpl/
-/entity/
-/exceptions/
-/interfaces/
-/levelmanager/
-/map/
-/model/
-/service/
 /gui/

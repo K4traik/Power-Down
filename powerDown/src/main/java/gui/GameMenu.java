@@ -9,9 +9,10 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import levelmanager.LevelManager;
 
-public class MenuApp extends Application {
-
+public class GameMenu extends Application {
+	private LevelManager lM = new LevelManager();
     @Override
     public void start(Stage primaryStage) {
         Label title = new Label("POWER DOWN");

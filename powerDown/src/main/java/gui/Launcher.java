@@ -4,6 +4,6 @@ import javafx.application.Application;
 
 public class Launcher {
 	public static void main(String[] args) {
-		Application.launch(MenuApp.class, args);
+		Application.launch(GameMenu.class, args);
     }
 }
