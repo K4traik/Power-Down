@@ -36,6 +36,7 @@ public class LevelManager{
 			nextLevel();
 		}
 	}
+	
 	public void nextTurn(){
 		System.out.println("Elige una dirección para moverte: ");
 		System.out.println("1. Norte.\n2. Este.\n3. Sur.\n4. Oeste.\n5. No moverse.");
@@ -52,6 +53,7 @@ public class LevelManager{
 		sc.close();
 		turn++;
 	}
+	
 	public void nextLevel() {
 		if(currentLevel<5) {
 			currentLevel++;
@@ -60,6 +62,7 @@ public class LevelManager{
 			System.out.println("Juego completado!");
 		}
 	}
+	
 	public void playerAct(int input) throws InvalidInputException, InvalidPositionException{
 		switch(input) {
 		case 1:
@@ -113,6 +116,7 @@ public class LevelManager{
 			throw new InvalidInputException("El valor ingresado no corresponde a ninguna dirección.");
 		}
 	}
+	
 	public void appliancesAct() {
 		for(Appliance a:appliances) {
 			if(a instanceof Actionable) {
@@ -120,6 +124,7 @@ public class LevelManager{
 			}
 		}
 	}
+	
 	public boolean checkPositionMap(Position p) {
 		boolean flag = false;
 		for(Position np:map.getPositions()) {
@@ -129,6 +134,7 @@ public class LevelManager{
 		}
 		return flag;
 	}
+	
 	public Wires checkPositionWires(Position p) {
 		for(Wires w:wires) {
 			if(w.getPosition() == p) {
@@ -137,6 +143,7 @@ public class LevelManager{
 		}
 		return null;
 	}
+	
 	public boolean checkPositionAppliances(Position p) {
 		boolean flag = false;
 		for(Appliance a:appliances) {
@@ -146,36 +153,47 @@ public class LevelManager{
 		}
 		return flag;
 	}
+	
 	public int getCurrentLevel() {
 		return currentLevel;
 	}
+	
 	public Map getMap() {
 		return map;
 	}
+	
 	public void setMap(Map map) {
 		this.map = map;
 	}
+	
 	public Human getPlayer() {
 		return player;
 	}
+	
 	public void setPlayer(Human player) {
 		this.player = player;
 	}
+	
 	public ArrayList<Wires> getWires() {
 		return wires;
 	}
+	
 	public void addWires(Wires w) {
 		wires.add(w);
 	}
+	
 	public ArrayList<Appliance> getAppliances() {
 		return appliances;
 	}
+	
 	public void addAppliances(Appliance a) {
 		appliances.add(a);
 	}
+	
 	public int getTurn() {
 		return turn;
 	}
+	
 	public void setTurn(int turn) {
 		this.turn = turn;
 	}

@@ -13,6 +13,7 @@ import levelmanager.LevelManager;
 
 public class GameMenu extends Application {
 	private LevelManager lM = new LevelManager();
+	
     @Override
     public void start(Stage primaryStage) {
         Label title = new Label("POWER DOWN");
@@ -29,6 +30,9 @@ public class GameMenu extends Application {
 
         btnSaves.setOnAction(e -> {
             System.out.println("Abriendo menú de sesiones...");
+            SessionMenu sessions = new SessionMenu();
+            sessions.mostrarSesiones(primaryStage, () -> {
+            });
         });
 
         btnLeave.setOnAction(e -> primaryStage.close());
