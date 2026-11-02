@@ -25,14 +25,12 @@ public class GameMenu extends Application {
         Button btnLeave = createButton("Salir");
 
         btnPlay.setOnAction(e -> {
-            System.out.println("Iniciando partida...");
+            new GameLevel(lM).start(primaryStage);
         });
 
         btnSaves.setOnAction(e -> {
             System.out.println("Abriendo menú de sesiones...");
-            SessionMenu sessions = new SessionMenu();
-            sessions.mostrarSesiones(primaryStage, () -> {
-            });
+            new SessionMenu().mostrarSesiones(primaryStage, () -> {});
         });
 
         btnLeave.setOnAction(e -> primaryStage.close());
@@ -76,4 +74,11 @@ public class GameMenu extends Application {
 
         return btn;
     }
+    
+	public LevelManager getlM() {
+		return lM;
+	}
+	public void setlM(LevelManager lM) {
+		this.lM = lM;
+	}
 }

@@ -3,10 +3,15 @@ package levelmanager;
 import entity.Appliance;
 import entity.Human;
 import entity.Wires;
+import exceptions.IdOutOfBoundsException;
+import exceptions.InactiveSessionException;
 import exceptions.InvalidInputException;
 import exceptions.InvalidPositionException;
+import exceptions.SessionNotFoundException;
 import interfaces.Actionable;
 import map.Map;
+import service.SessionProgressionService;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -19,8 +24,11 @@ public class LevelManager{
 	private ArrayList<Wires> wires;
 	private ArrayList<Appliance> appliances;
 	private int turn;
+	private SessionProgressionService sessionsDB = new SessionProgressionService();
 	
 	public LevelManager() {
+		sessionsDB.initializeSaves(); //va a tirar error si es que la base de datos no está conectada. Fijate que la primera
+		updateCurrentLevel(1);
 		map = new Map();
 	}
 	
@@ -30,7 +38,7 @@ public class LevelManager{
 		while(turn<=100 && !appliances.isEmpty() && player.getHealth()>0) {
 			nextTurn();
 		}
-		if(player.getHealth()==0) {
+		if(player.getHealth()==0 || turn>100) {
 			start();
 		}else {
 			nextLevel();
@@ -154,47 +162,51 @@ public class LevelManager{
 		return flag;
 	}
 	
+	public void updateCurrentLevel(int choosenSave) {
+		try {
+			setCurrentLevel(sessionsDB.getSession(1).getCurrentLevel());
+		}catch(IdOutOfBoundsException ex) {
+			ex.printStackTrace();
+		}catch(SessionNotFoundException ex) {
+			ex.printStackTrace();
+		}catch(InactiveSessionException ex) {
+			ex.printStackTrace();
+		}
+	}
 	public int getCurrentLevel() {
 		return currentLevel;
 	}
-	
 	public Map getMap() {
 		return map;
 	}
-	
 	public void setMap(Map map) {
 		this.map = map;
 	}
-	
 	public Human getPlayer() {
 		return player;
 	}
-	
 	public void setPlayer(Human player) {
 		this.player = player;
 	}
-	
 	public ArrayList<Wires> getWires() {
 		return wires;
 	}
-	
 	public void addWires(Wires w) {
 		wires.add(w);
 	}
-	
 	public ArrayList<Appliance> getAppliances() {
 		return appliances;
 	}
-	
 	public void addAppliances(Appliance a) {
 		appliances.add(a);
 	}
-	
 	public int getTurn() {
 		return turn;
 	}
-	
 	public void setTurn(int turn) {
 		this.turn = turn;
+	}
+	public void setCurrentLevel(int currentLevel) {
+		this.currentLevel = currentLevel;
 	}
 }
