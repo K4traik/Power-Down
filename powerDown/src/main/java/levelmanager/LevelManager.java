@@ -9,6 +9,7 @@ import exceptions.InvalidInputException;
 import exceptions.InvalidPositionException;
 import exceptions.SessionNotFoundException;
 import interfaces.Actionable;
+import map.Levels;
 import map.Map;
 import service.SessionProgressionService;
 
@@ -29,7 +30,6 @@ public class LevelManager{
 	public LevelManager() {
 		sessionsDB.initializeSaves(); //va a tirar error si es que la base de datos no está conectada. Fijate que la primera
 		updateCurrentLevel(1);
-		map = new Map();
 	}
 	
 	public void start() {
@@ -171,6 +171,18 @@ public class LevelManager{
 			ex.printStackTrace();
 		}catch(InactiveSessionException ex) {
 			ex.printStackTrace();
+		}
+		updateMap();
+	}
+	public void updateMap() {
+		switch(this.currentLevel) {
+		case 1: setMap(Levels.getMap(1));
+		break;
+		case 2: setMap(Levels.getMap(2));
+		break;
+		case 3: setMap(Levels.getMap(3));
+		break;
+		default: setMap(Levels.getMap(1));
 		}
 	}
 	public int getCurrentLevel() {
