@@ -26,8 +26,12 @@ public class SessionProgressionService {
 			}
 			return new SessionProgression(1, 1);
 		}catch(InactiveSessionException ex) {
-			System.out.println(ex.getMessage());
-			return null;
+			try{
+				saveSession(1, 1);
+			}catch(InvalidLevelException ex1) {
+				System.out.println(ex1.getMessage());
+			}
+			return new SessionProgression(1, 1);
 		}
 	}
 	

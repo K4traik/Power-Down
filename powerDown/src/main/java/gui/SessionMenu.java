@@ -13,7 +13,7 @@ public class SessionMenu {
 
 	public void mostrarSesiones(Stage ventana, Runnable volverMenu) {
 
-    	Label title= new Label ("Menu de Sessiones");
+    	Label title= new Label ("Menu de Sesiones");
         title.setFont(new Font("Arial", 36));
         title.setStyle("-fx-font-weight: bold; -fx-text-fill: white;");
         
