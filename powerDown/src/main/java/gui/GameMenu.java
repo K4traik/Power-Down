@@ -37,7 +37,9 @@ public class GameMenu extends Application {
 
         btnSaves.setOnAction(e -> {
             System.out.println("Abriendo menú de sesiones...");
-            new SessionMenu().mostrarSesiones(primaryStage, () -> {});
+            new SessionMenu().mostrarSesiones(primaryStage, () -> {
+                this.start(primaryStage); 
+                });
         });
 
         btnLeave.setOnAction(e -> primaryStage.close());
