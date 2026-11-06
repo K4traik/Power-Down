@@ -8,6 +8,9 @@ import entity.Laptop;
 import entity.Oven;
 import entity.Toaster;
 import entity.Vacuum;
+import entity.Wires;
+import exceptions.InvalidInputException;
+import exceptions.InvalidPositionException;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.text.Font;
@@ -76,11 +79,19 @@ public class GameLevel extends Application{
 			}
 		}
 	}
-	public void drawWires() {
-		
+	public void drawWires(GraphicsContext gc) {
+		for(Wires w:lM.getLevel().getWires()) {
+			if(w.getVariation() == 3) {
+				gc.drawImage(wireSprite3, w.getPosition().x*32, w.getPosition().y*32);
+			}else if(w.getVariation() == 2) {
+				gc.drawImage(wireSprite2, w.getPosition().x*32, w.getPosition().y*32);
+			}else if(w.getVariation() == 1) {
+				gc.drawImage(wireSprite1, w.getPosition().x*32, w.getPosition().y*32);
+			}
+		}
 	}
-	public void drawPlayer() {
-		
+	public void drawPlayer(GraphicsContext gc) {
+		gc.drawImage(playerSprite, lM.getPlayer().getPosition().x*32, lM.getPlayer().getPosition().y*32);
 	}
 	@Override
 	public void start(Stage primaryStage) {
@@ -110,6 +121,7 @@ public class GameLevel extends Application{
         } catch (Exception e) {
             System.out.println("Error al cargar las imágenes desde resources: " + e.getMessage());
         }
+		lM.start();
 		
 		Button btnGoBack = createButton("Volver");
 		
@@ -121,6 +133,8 @@ public class GameLevel extends Application{
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		drawMap(gc);
 		drawAppliances(gc);
+		drawWires(gc);
+		drawPlayer(gc);
 		
 		VBox menu = new VBox(20);
         menu.setAlignment(Pos.BOTTOM_CENTER);
@@ -134,6 +148,47 @@ public class GameLevel extends Application{
         primaryStage.setTitle("PowerDown");
         primaryStage.setScene(scene);
         primaryStage.show();
+        
+        scene.setOnKeyPressed(e -> {
+        	if (lM.getTurn() >= 100) {
+        		lM.nextLevel();
+        	}
+        	
+        	try {
+            	boolean moved = false;
+            	
+            	switch(e.getCode()) {
+            	case W, UP:
+            		lM.nextTurn(1);
+            		moved = true;
+            		break;
+            	case D, RIGHT:
+            		lM.nextTurn(2);
+            		moved = true;
+            		break;
+            	case S, DOWN:
+            		lM.nextTurn(3);
+            		moved = true;
+            		break;
+            	case A, LEFT:
+            		lM.nextTurn(4);
+            		moved = true;
+            		break;
+            	}
+            	
+            	if (moved) {
+            		gc.clearRect(0, 0, 320, 320);
+            		drawMap(gc);
+            		drawAppliances(gc);
+            		drawWires(gc);
+            		drawPlayer(gc);
+            		
+            		System.out.println("Turno actual: " + lM.getTurn());
+            	}
+        	}catch (InvalidInputException | InvalidPositionException ex) {
+        		ex.printStackTrace();
+        	}
+        });
 	}
 	
 	private Button createButton(String text) {

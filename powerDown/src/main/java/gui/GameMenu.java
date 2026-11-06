@@ -14,6 +14,13 @@ import levelmanager.LevelManager;
 public class GameMenu extends Application {
 	private LevelManager lM = new LevelManager();
 	
+	public GameMenu() {
+		lM = new LevelManager();
+	}
+	public GameMenu(LevelManager lM) {
+		setLevelManager(lM);
+	}
+	
     @Override
     public void start(Stage primaryStage) {
         Label title = new Label("POWER DOWN");
@@ -75,10 +82,10 @@ public class GameMenu extends Application {
         return btn;
     }
     
-	public LevelManager getlM() {
+	public LevelManager getLevelManager() {
 		return lM;
 	}
-	public void setlM(LevelManager lM) {
+	public void setLevelManager(LevelManager lM) {
 		this.lM = lM;
 	}
 }

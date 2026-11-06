@@ -22,22 +22,22 @@ public class Human extends Entity{
 	
 	public Position walkNorth() {
 		Position p = getPosition();
-		p.y = p.y + 1;
-		return p;
+		Position np = new Position(p.x, p.y-1);
+		return np;
 	}
 	public Position walkSouth() {
 		Position p = getPosition();
-		p.y = p.y - 1;
-		return p;
+		Position np = new Position(p.x, p.y+1);
+		return np;
 	}
 	public Position walkEast() {
 		Position p = getPosition();
-		p.x = p.x + 1;
-		return p;
+		Position np = new Position(p.x+1, p.y);
+		return np;
 	}
 	public Position walkWest() {
 		Position p = getPosition();
-		p.x = p.x - 1;
-		return p;
+		Position np = new Position(p.x-1, p.y);
+		return np;
 	}
 }

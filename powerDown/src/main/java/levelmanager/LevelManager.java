@@ -3,8 +3,11 @@ package levelmanager;
 import entity.Appliance;
 import entity.Human;
 import entity.Wires;
+import exceptions.IdOutOfBoundsException;
+import exceptions.InactiveSessionException;
 import exceptions.InvalidInputException;
 import exceptions.InvalidPositionException;
+import exceptions.SessionNotFoundException;
 import interfaces.Actionable;
 import map.Levels;
 import map.Level;
@@ -19,106 +22,63 @@ public class LevelManager{
 	private Human player;
 	private Level level;
 	private int turn;
+	private SessionProgressionService sessionsDB;
 	
 	public LevelManager() {
-		map = new Map();
+		sessionsDB = new SessionProgressionService();
+		sessionsDB.initializeSaves();
+		updateCurrentLevel(1);
 	}
 	
 	public void start() {
+		player = new Human(new Position(0, 0), 5);
+		updateLevel();
 		turn = 0;
-		player.setHealth(5);
-		while(turn<=100 && !level.getAppliances().isEmpty() && player.getHealth()>0) {
-			nextTurn();
-		}
-		
-		if(player.getHealth()==0) {
-			start();
-		}
-		else {
-			nextLevel();
-		}
 	}
 	
-	public void nextTurn(){
-		System.out.println("Elige una dirección para moverte: ");
-		System.out.println("1. Norte.\n2. Este.\n3. Sur.\n4. Oeste.\n5. No moverse.");
-		Scanner sc = new Scanner(System.in);
-		int input = sc.nextInt();
-		try {
-			playerAct(input);
-		}catch(InvalidInputException ex) {
-			System.out.println(ex.getMessage());
-		}catch(InvalidPositionException ex) {
-			System.out.println(ex.getMessage());
-		}
-		appliancesAct();
-		sc.close();
+	public void nextTurn(int input) throws InvalidInputException, InvalidPositionException{
+		playerAct(input);
 		turn++;
 	}
 	
 	public void nextLevel() {
-		if(currentLevel<5) {
+		if(currentLevel<3) {
 			currentLevel++;
 			start();
 		}else {
 			System.out.println("Juego completado!");
 		}
 	}
-	
-	public void playerAct(int input) throws InvalidInputException, InvalidPositionException{
+	public void playerAct(int input) throws InvalidInputException, InvalidPositionException {
+		Position nextPos;
 		switch(input) {
 		case 1:
-			if(checkPositionMap(player.walkNorth())) {
-				throw new InvalidPositionException("El jugador intentó moverse a una pared.");
-			}
-			if(checkPositionWires(player.walkNorth()) != null) {
-				checkPositionWires(player.walkNorth()).steppedOn();
-			}
-			if(checkPositionAppliances(player.walkNorth())) {
-				throw new InvalidPositionException("El jugador intentó moverse a un electrodómestico.");
-			}
+			nextPos = player.walkNorth();
 			break;
 		case 2:
-			if(checkPositionMap(player.walkEast())) {
-				throw new InvalidPositionException("El jugador intentó moverse a una pared.");
-			}
-			if(checkPositionWires(player.walkEast()) != null) {
-				checkPositionWires(player.walkEast()).steppedOn();
-			}
-			if(checkPositionAppliances(player.walkEast())) {
-				throw new InvalidPositionException("El jugador intentó moverse a un electrodómestico.");
-			}
+			nextPos = player.walkEast();
 			break;
 		case 3:
-			if(checkPositionMap(player.walkSouth())) {
-				throw new InvalidPositionException("El jugador intentó moverse a una pared.");
-			}
-			if(checkPositionWires(player.walkSouth()) != null) {
-				checkPositionWires(player.walkSouth()).steppedOn();
-			}
-			if(checkPositionAppliances(player.walkSouth())) {
-				throw new InvalidPositionException("El jugador intentó moverse a un electrodómestico.");
-			}
+			nextPos = player.walkSouth();
 			break;
 		case 4:
-			if(checkPositionMap(player.walkWest())) {
-				throw new InvalidPositionException("El jugador intentó moverse a una pared.");
-			}
-			if(checkPositionWires(player.walkWest()) != null) {
-				checkPositionWires(player.walkWest()).steppedOn();
-			}
-			if(checkPositionAppliances(player.walkWest())) {
-				throw new InvalidPositionException("El jugador intentó moverse a un electrodómestico.");
-			}
-			break;
-		case 5:
-			
+			nextPos = player.walkWest();
 			break;
 		default:
 			throw new InvalidInputException("El valor ingresado no corresponde a ninguna dirección.");
 		}
+		if (checkPositionMap(nextPos)) {
+			throw new InvalidPositionException("El jugador intentó moverse a una pared.");
+		} 
+		Wires wire = checkPositionWires(nextPos);
+		if (wire != null) {
+			wire.steppedOn();
+		} 
+		if (checkPositionAppliances(nextPos)) {
+			throw new InvalidPositionException("El jugador intentó moverse a un electrodoméstico.");
+		}
+		player.move(nextPos);
 	}
-	
 	public void appliancesAct() {
 		for(Appliance a:level.getAppliances()	) {
 			if(a instanceof Actionable) {
@@ -165,7 +125,6 @@ public class LevelManager{
 		}catch(InactiveSessionException ex) {
 			ex.printStackTrace();
 		}
-		updateLevel();
 	}
 	public void updateLevel() {
 		setLevel(Levels.getLevel(currentLevel));

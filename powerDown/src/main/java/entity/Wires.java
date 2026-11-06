@@ -36,3 +36,4 @@ public class Wires extends Entity{
 	public void setFacing(int facing) {
 		this.facing = facing;
 	}
+}
