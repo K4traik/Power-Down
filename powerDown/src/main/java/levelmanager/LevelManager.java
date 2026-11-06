@@ -3,16 +3,10 @@ package levelmanager;
 import entity.Appliance;
 import entity.Human;
 import entity.Wires;
-import exceptions.IdOutOfBoundsException;
-import exceptions.InactiveSessionException;
 import exceptions.InvalidInputException;
 import exceptions.InvalidPositionException;
-import exceptions.SessionNotFoundException;
 import interfaces.Actionable;
-import map.Levels;
 import map.Map;
-import service.SessionProgressionService;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -25,11 +19,9 @@ public class LevelManager{
 	private ArrayList<Wires> wires;
 	private ArrayList<Appliance> appliances;
 	private int turn;
-	private SessionProgressionService sessionsDB = new SessionProgressionService();
 	
 	public LevelManager() {
-		sessionsDB.initializeSaves(); //va a tirar error si es que la base de datos no está conectada. Fijate que la primera
-		updateCurrentLevel(1);
+		map = new Map();
 	}
 	
 	public void start() {
@@ -39,12 +31,8 @@ public class LevelManager{
 		while(turn<=100 && !appliances.isEmpty() && player.getHealth()>0) {
 			nextTurn();
 		}
-<<<<<<< HEAD
 		
 		if(player.getHealth()==0) {
-=======
-		if(player.getHealth()==0 || turn>100) {
->>>>>>> becb401927c9aa17ca09660251cfb5b6238cffbc
 			start();
 		}
 		else {
@@ -169,63 +157,47 @@ public class LevelManager{
 		return flag;
 	}
 	
-	public void updateCurrentLevel(int choosenSave) {
-		try {
-			setCurrentLevel(sessionsDB.getSession(1).getCurrentLevel());
-		}catch(IdOutOfBoundsException ex) {
-			ex.printStackTrace();
-		}catch(SessionNotFoundException ex) {
-			ex.printStackTrace();
-		}catch(InactiveSessionException ex) {
-			ex.printStackTrace();
-		}
-		updateMap();
-	}
-	public void updateMap() {
-		switch(this.currentLevel) {
-		case 1: setMap(Levels.getMap(1));
-		break;
-		case 2: setMap(Levels.getMap(2));
-		break;
-		case 3: setMap(Levels.getMap(3));
-		break;
-		default: setMap(Levels.getMap(1));
-		}
-	}
 	public int getCurrentLevel() {
 		return currentLevel;
 	}
+	
 	public Map getMap() {
 		return map;
 	}
+	
 	public void setMap(Map map) {
 		this.map = map;
 	}
+	
 	public Human getPlayer() {
 		return player;
 	}
+	
 	public void setPlayer(Human player) {
 		this.player = player;
 	}
+	
 	public ArrayList<Wires> getWires() {
 		return wires;
 	}
+	
 	public void addWires(Wires w) {
 		wires.add(w);
 	}
+	
 	public ArrayList<Appliance> getAppliances() {
 		return appliances;
 	}
+	
 	public void addAppliances(Appliance a) {
 		appliances.add(a);
 	}
+	
 	public int getTurn() {
 		return turn;
 	}
+	
 	public void setTurn(int turn) {
 		this.turn = turn;
-	}
-	public void setCurrentLevel(int currentLevel) {
-		this.currentLevel = currentLevel;
 	}
 }
