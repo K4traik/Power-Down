@@ -24,4 +24,7 @@ public class Map {
 	public void setPositions(ArrayList<Position> positions) {
 		this.positions = positions;
 	}
+	public void addPosition(Position p) {
+		positions.add(p);
+	}
 }

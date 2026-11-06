@@ -40,7 +40,7 @@ public class GameMenu extends Application {
         menu.getChildren().addAll(title, btnPlay, btnSaves, btnLeave);
 
         StackPane root = new StackPane();
-        root.setStyle("-fx-background-color: #1e1e24;");
+        root.setStyle("-fx-background-color: #222034;");
         root.getChildren().add(menu);
 
         Scene scene = new Scene(root, 800, 600);
@@ -53,22 +53,22 @@ public class GameMenu extends Application {
         Button btn = new Button(text);
         btn.setPrefWidth(200);
         btn.setPrefHeight(40);
-        btn.setFont(new Font("Arial", 16));
+        btn.setFont(new Font("Roboto", 16));
         btn.setStyle(
-            "-fx-background-color: #3a3d40; " +
-            "-fx-text-fill: white; " +
+            "-fx-background-color: #5b6ee1; " +
+            "-fx-text-fill: black; " +
             "-fx-background-radius: 8;"
         );
 
         btn.setOnMouseEntered(e -> btn.setStyle(
-            "-fx-background-color: #575a5e; " +
-            "-fx-text-fill: white; " +
+            "-fx-background-color: #5fcde4; " +
+            "-fx-text-fill: black; " +
             "-fx-background-radius: 8;"
         ));
         
         btn.setOnMouseExited(e -> btn.setStyle(
-            "-fx-background-color: #3a3d40; " +
-            "-fx-text-fill: white; " +
+            "-fx-background-color: #639bff; " +
+            "-fx-text-fill: black; " +
             "-fx-background-radius: 8;"
         ));
 

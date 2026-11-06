@@ -4,4 +4,5 @@
     <fullyQualifiedTypeName name="exceptions.InactiveSessionException"/>
     <fullyQualifiedTypeName name="exceptions.SessionNotFoundException"/>
     <fullyQualifiedTypeName name="gui.GameMenu"/>
+    <fullyQualifiedTypeName name="map.Levels"/>
 </qualifiedTypeNameHistroy>

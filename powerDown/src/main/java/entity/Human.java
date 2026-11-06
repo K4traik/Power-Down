@@ -5,13 +5,8 @@ import components.Position;
 public class Human extends Entity{
 	private int health;
 	
-	public Human(int x, int y, int health) {
-        super(x, y); 
-        this.health = health;
-    }
-
 	public Human(Position position, int health) {
-        super(position);
+		super(position);
         this.health = health;
     }
 	
@@ -43,7 +38,6 @@ public class Human extends Entity{
 	public Position walkWest() {
 		Position p = getPosition();
 		p.x = p.x - 1;
-		move(p);
 		return p;
 	}
 }

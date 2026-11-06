@@ -2,11 +2,10 @@ package entity;
 
 import components.Position;
 import interfaces.Actionable;
-import levelmanager.LevelManager;
 
 public class Oven extends Appliance implements Actionable{
-	public Oven(boolean active, int facing, LevelManager lM, Position position) {
-		super(active, facing, lM, position);
+	public Oven(boolean active, int facing, Position position) {
+		super(active, facing, position);
 	}
 	@Override
 	public void act() {

@@ -6,18 +6,18 @@ import entity.Wires;
 import exceptions.InvalidInputException;
 import exceptions.InvalidPositionException;
 import interfaces.Actionable;
-import map.Map;
-import java.util.ArrayList;
+import map.Levels;
+import map.Level;
+import service.SessionProgressionService;
+
 import java.util.Scanner;
 
 import components.Position;
 
 public class LevelManager{
 	private int currentLevel;
-	private Map map;
 	private Human player;
-	private ArrayList<Wires> wires;
-	private ArrayList<Appliance> appliances;
+	private Level level;
 	private int turn;
 	
 	public LevelManager() {
@@ -27,8 +27,7 @@ public class LevelManager{
 	public void start() {
 		turn = 0;
 		player.setHealth(5);
-		
-		while(turn<=100 && !appliances.isEmpty() && player.getHealth()>0) {
+		while(turn<=100 && !level.getAppliances().isEmpty() && player.getHealth()>0) {
 			nextTurn();
 		}
 		
@@ -121,7 +120,7 @@ public class LevelManager{
 	}
 	
 	public void appliancesAct() {
-		for(Appliance a:appliances) {
+		for(Appliance a:level.getAppliances()	) {
 			if(a instanceof Actionable) {
 				((Actionable) a).act();
 			}
@@ -130,7 +129,7 @@ public class LevelManager{
 	
 	public boolean checkPositionMap(Position p) {
 		boolean flag = false;
-		for(Position np:map.getPositions()) {
+		for(Position np:level.getMap().getPositions()) {
 			if(np == p) {
 				flag = true;
 			}
@@ -139,7 +138,7 @@ public class LevelManager{
 	}
 	
 	public Wires checkPositionWires(Position p) {
-		for(Wires w:wires) {
+		for(Wires w:level.getWires()) {
 			if(w.getPosition() == p) {
 				return w;
 			}
@@ -149,26 +148,31 @@ public class LevelManager{
 	
 	public boolean checkPositionAppliances(Position p) {
 		boolean flag = false;
-		for(Appliance a:appliances) {
+		for(Appliance a:level.getAppliances()) {
 			if(a.getPosition() == p) {
 				flag = true;
 			}
 		}
 		return flag;
 	}
-	
+	public void updateCurrentLevel(int choosenSave) {
+		try {
+			setCurrentLevel(sessionsDB.getSession(1).getCurrentLevel());
+		}catch(IdOutOfBoundsException ex) {
+			ex.printStackTrace();
+		}catch(SessionNotFoundException ex) {
+			ex.printStackTrace();
+		}catch(InactiveSessionException ex) {
+			ex.printStackTrace();
+		}
+		updateLevel();
+	}
+	public void updateLevel() {
+		setLevel(Levels.getLevel(currentLevel));
+	}
 	public int getCurrentLevel() {
 		return currentLevel;
 	}
-	
-	public Map getMap() {
-		return map;
-	}
-	
-	public void setMap(Map map) {
-		this.map = map;
-	}
-	
 	public Human getPlayer() {
 		return player;
 	}
@@ -176,28 +180,22 @@ public class LevelManager{
 	public void setPlayer(Human player) {
 		this.player = player;
 	}
-	
-	public ArrayList<Wires> getWires() {
-		return wires;
-	}
-	
-	public void addWires(Wires w) {
-		wires.add(w);
-	}
-	
-	public ArrayList<Appliance> getAppliances() {
-		return appliances;
-	}
-	
-	public void addAppliances(Appliance a) {
-		appliances.add(a);
-	}
-	
 	public int getTurn() {
 		return turn;
 	}
 	
 	public void setTurn(int turn) {
 		this.turn = turn;
+	}
+	public void setCurrentLevel(int currentLevel) {
+		this.currentLevel = currentLevel;
+	}
+
+	public Level getLevel() {
+		return level;
+	}
+
+	public void setLevel(Level level) {
+		this.level = level;
 	}
 }
