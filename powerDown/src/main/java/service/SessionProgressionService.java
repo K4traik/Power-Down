@@ -30,6 +30,7 @@ public class SessionProgressionService {
 			return null;
 		}
 	}
+	
 	public SessionProgression getSession(int id) throws IdOutOfBoundsException, SessionNotFoundException, InactiveSessionException{
 		if(id > 3 || id<= 0) {
 			throw new IdOutOfBoundsException("No existen sesiones con ID mayor a 3 ni menores o iguales a 0.");
@@ -43,6 +44,7 @@ public class SessionProgressionService {
 		}
 		return s;
 	}
+	
 	public void turnOffSession(int id) throws AlreadyInactiveException{
 		try {
 			SessionProgression s = getSession(id);
@@ -58,6 +60,7 @@ public class SessionProgressionService {
 			System.out.println(ex.getMessage());
 		}
 	}
+	
 	public void saveSession(int id, int currentLevel) throws InvalidLevelException{
 		try {
 			if(currentLevel<=0 || currentLevel>5) {

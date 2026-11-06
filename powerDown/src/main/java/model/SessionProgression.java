@@ -10,6 +10,7 @@ public class SessionProgression {
 		this.setCurrentLevel(currentLevel);
 		this.setActive(true);
 	}
+	
 	public SessionProgression(int id, int currentLevel, boolean active) {
 		this.setId(id);
 		this.setCurrentLevel(currentLevel);
@@ -19,19 +20,25 @@ public class SessionProgression {
 	public int getId() {
 		return id;
 	}
+	
 	public void setId(int id) {
 		this.id = id;
 	}
+	
 	public int getCurrentLevel() {
 		return currentLevel;
 	}
+	
 	public void setCurrentLevel(int currentLevel) {
 		this.currentLevel = currentLevel;
 	}
+	
 	public boolean isActive() {
 		return active;
 	}
+	
 	public void setActive(boolean active) {
 		this.active = active;
 	}
+	
 }

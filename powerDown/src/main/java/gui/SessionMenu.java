@@ -24,7 +24,7 @@ public class SessionMenu {
         HBox slot1 = new HBox(20, Session1, btnLoad1);
         slot1.setAlignment(Pos.CENTER);
         
-        Label Session2= new Label ("partida 1");
+        Label Session2= new Label ("partida 2");
         Button btnLoad2 = createButton ("cargar");   
         btnLoad2.setDisable(true);
         

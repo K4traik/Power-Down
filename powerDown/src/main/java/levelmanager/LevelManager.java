@@ -27,12 +27,15 @@ public class LevelManager{
 	public void start() {
 		turn = 0;
 		player.setHealth(5);
+		
 		while(turn<=100 && !appliances.isEmpty() && player.getHealth()>0) {
 			nextTurn();
 		}
+		
 		if(player.getHealth()==0) {
 			start();
-		}else {
+		}
+		else {
 			nextLevel();
 		}
 	}
