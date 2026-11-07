@@ -6,4 +6,5 @@
     <fullyQualifiedTypeName name="gui.GameMenu"/>
     <fullyQualifiedTypeName name="map.Levels"/>
     <fullyQualifiedTypeName name="exceptions.InvalidInputException"/>
+    <fullyQualifiedTypeName name="java.lang.String"/>
 </qualifiedTypeNameHistroy>
