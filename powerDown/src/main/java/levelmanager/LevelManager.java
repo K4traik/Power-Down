@@ -62,10 +62,9 @@ public class LevelManager{
             ex.printStackTrace();
         }
     }
-	public void nextLevel(int idSession) {
+	public void nextLevel() {
 		if(currentLevel<3) {
 			currentLevel++;
-			guardarNivelActual(idSession);
 		}
 	}
 	public void playerAct(int input){
