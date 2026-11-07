@@ -21,9 +21,12 @@ public class SessionMenu extends Application{
         
         Label Session1= new Label ("partida 1");
         Button btnLoad1 = createButton ("cargar");
+        Button btnSave1 = createButton("guardar");
         Button btnDelete = createButton ("eliminar");
         btnLoad1.setDisable(false);
+        btnSave1.setDisable(false);
         btnDelete.setDisable(false);
+        
         
         btnLoad1.setOnAction(_ -> {
             System.out.println("Cargando partida 1...");
@@ -32,14 +35,21 @@ public class SessionMenu extends Application{
             new GameLevel(lM).start(ventana);
         });
         
+        btnSave1.setOnAction(_ -> {
+            System.out.println("Guardando en partida 1...");
+            lM.saveCurrentLevel(1);
+        });
+        
         HBox slot1 = new HBox(20, Session1, btnLoad1, btnDelete);
         slot1.setAlignment(Pos.CENTER);
         
         Label Session2= new Label ("partida 2");
         Button btnLoad2 = createButton ("cargar");
+        Button btnSave2 = createButton("guardar");
         Button btnDelete2 = createButton ("eliminar");
         
         btnLoad2.setDisable(false);
+        btnSave2.setDisable(false);
         btnDelete2.setDisable(false);
         
         btnLoad2.setOnAction(_ -> {
@@ -49,14 +59,21 @@ public class SessionMenu extends Application{
             new GameLevel(lM).start(ventana);
         });
         
+        btnSave2.setOnAction(_ -> {
+            System.out.println("Guardando en partida 2...");
+            lM.saveCurrentLevel(2);
+        });
+        
         HBox slot2 = new HBox(20, Session2, btnLoad2, btnDelete2);
         slot2.setAlignment(Pos.CENTER);
 
         Label Session3= new Label ("partida 3");
         Button btnLoad3 = createButton ("cargar");
+        Button btnSave3 = createButton("guardar");
         Button btnDelete3 = createButton ("eliminar");
 
         btnDelete3.setDisable(false);
+        btnSave3.setDisable(false);
         btnLoad3.setDisable(false);
         
         btnLoad3.setOnAction(_ -> {
@@ -64,6 +81,11 @@ public class SessionMenu extends Application{
             lM.updateCurrentLevel(3);
             lM.start();
             new GameLevel(lM).start(ventana);
+        });
+        
+        btnSave3.setOnAction(_ -> {
+            System.out.println("Guardando en partida 3...");
+            lM.saveCurrentLevel(3);
         });
         
         HBox slot3 = new HBox(20, Session3, btnLoad3, btnDelete3);
@@ -98,7 +120,7 @@ public class SessionMenu extends Application{
 
 	 private Button createButton(String text) {
 	        Button btn = new Button(text);
-	        btn.setPrefWidth(200);
+	        btn.setPrefWidth(150);
 	        btn.setPrefHeight(40);
 	        btn.setFont(new Font("Roboto", 16));
 	        btn.setStyle(
