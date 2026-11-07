@@ -54,9 +54,18 @@ public class LevelManager{
 		turn++;
 		appliancesAct();
 	}
-	public void nextLevel() {
+	public void guardarNivelActual(int idSession) {
+        try {
+            sessionsDB.getSession(idSession).setCurrentLevel(this.currentLevel);
+            System.out.println("Progreso guardado en la sesión " + idSession + " (Nivel " + this.currentLevel + ")");
+        } catch (IdOutOfBoundsException | SessionNotFoundException | InactiveSessionException ex) {
+            ex.printStackTrace();
+        }
+    }
+	public void nextLevel(int idSession) {
 		if(currentLevel<3) {
 			currentLevel++;
+			guardarNivelActual(idSession);
 		}
 	}
 	public void playerAct(int input){
@@ -129,7 +138,7 @@ public class LevelManager{
 	}
 	public void updateCurrentLevel(int choosenSave) {
 		try {
-			setCurrentLevel(sessionsDB.getSession(1).getCurrentLevel());
+			setCurrentLevel(sessionsDB.getSession(choosenSave).getCurrentLevel());
 		}catch(IdOutOfBoundsException ex) {
 			ex.printStackTrace();
 		}catch(SessionNotFoundException ex) {

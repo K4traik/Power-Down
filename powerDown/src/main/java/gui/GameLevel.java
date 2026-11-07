@@ -132,7 +132,7 @@ public class GameLevel extends Application{
 		
 		Button btnGoBack = createButton("Volver");
 		
-		btnGoBack.setOnAction(_ -> {
+		btnGoBack.setOnAction(e -> {
             new GameMenu().start(primaryStage);
         });
 		
@@ -257,13 +257,13 @@ public class GameLevel extends Application{
             "-fx-background-radius: 8;"
         );
 
-        btn.setOnMouseEntered(_ -> btn.setStyle(
+        btn.setOnMouseEntered(e -> btn.setStyle(
             "-fx-background-color: #5fcde4; " +
             "-fx-text-fill: black; " +
             "-fx-background-radius: 8;"
         ));
         
-        btn.setOnMouseExited(_ -> btn.setStyle(
+        btn.setOnMouseExited(e -> btn.setStyle(
             "-fx-background-color: #639bff; " +
             "-fx-text-fill: black; " +
             "-fx-background-radius: 8;"
