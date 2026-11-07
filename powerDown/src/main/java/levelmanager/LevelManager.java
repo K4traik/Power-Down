@@ -69,39 +69,44 @@ public class LevelManager{
 		}
 	}
 	public void playerAct(int input){
-		Position nextPos = null;
-		switch(input) {
-		case 1:
-			nextPos = player.walkNorth();
-			break;
-		case 2:
-			nextPos = player.walkEast();
-			break;
-		case 3:
-			nextPos = player.walkSouth();
-			break;
-		case 4:
-			nextPos = player.walkWest();
-			break;
-		}
-		if(nextPos!=null) {
-			if (!checkPositionMap(nextPos)) {
-				System.out.println("muro");
-				player.move(player.getPosition());
-			}else if (checkPositionAppliances(nextPos)) {
-				System.out.println("appliance");
-				player.move(player.getPosition());
-			}else {
-				Wires wire = checkPositionWires(nextPos);
-				if(wire != null) {
-					if(wire.getAppliance().isActive()) {
-						level.addExplosion(wire.getAppliance().getPosition());
-						wire.steppedOn();
-					}
-				}
-				player.move(nextPos);
-				nextTurn();
+		if(!player.isFrozen()) {
+			Position nextPos = null;
+			switch(input) {
+			case 1:
+				nextPos = player.walkNorth();
+				break;
+			case 2:
+				nextPos = player.walkEast();
+				break;
+			case 3:
+				nextPos = player.walkSouth();
+				break;
+			case 4:
+				nextPos = player.walkWest();
+				break;
 			}
+			if(nextPos!=null) {
+				if (!checkPositionMap(nextPos)) {
+					System.out.println("muro");
+					player.move(player.getPosition());
+				}else if (checkPositionAppliances(nextPos)) {
+					System.out.println("appliance");
+					player.move(player.getPosition());
+				}else {
+					Wires wire = checkPositionWires(nextPos);
+					if(wire != null) {
+						if(wire.getAppliance().isActive()) {
+							level.addExplosion(wire.getAppliance().getPosition());
+							wire.steppedOn();
+						}
+					}
+					player.move(nextPos);
+					nextTurn();
+				}
+			}
+		}else {
+			nextTurn();
+			player.setFrozen(false);
 		}
 	}
 	public void appliancesAct() {

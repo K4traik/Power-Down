@@ -194,9 +194,8 @@ public class GameLevel extends Application{
         	if (isExploding) {
                 return; 
             }
-        	
             boolean moved = false;
-            	
+            
             switch(e.getCode()) {
             case W:
             	lM.playerAct(1);
