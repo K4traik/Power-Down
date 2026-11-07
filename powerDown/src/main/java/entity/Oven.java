@@ -21,7 +21,11 @@ public class Oven extends Appliance implements Actionable{
 		fire(player);
 	}
 	public void fire(Human player) {
-		
+		for(Position p:view) {
+			if(p.comparePosition(player.getPosition())) {
+				player.damaged();
+			}
+		}
 	}
 	public void buildView(Level level) {
 		if(facing == 1) { //abajo
