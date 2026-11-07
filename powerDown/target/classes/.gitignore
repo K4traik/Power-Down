@@ -1,8 +1,8 @@
-/META-INF/
+/gui/
+/interfaces/
 /levelmanager/
 /map/
-/entity/
-/gui/
-/components/
 /model/
 /service/
+/META-INF/
+/entity/

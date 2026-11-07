@@ -37,7 +37,7 @@ public class Levels {
 		wires.add(wire2fan1);
 		wires.add(wire1fan1);
 		
-		return new Level(map, wires, appliances);
+		return new Level(map, wires, appliances, new ArrayList<Position>());
 	}
 	public static Level secondLevel() {
 		Map map = basicGrid();
@@ -76,7 +76,7 @@ public class Levels {
 		appliances.add(toaster2);
 		appliances.add(toaster1);
 		
-		return new Level(map, wires, appliances);
+		return new Level(map, wires, appliances, new ArrayList<Position>());
 	}
 	public static Level thirdLevel() {
 		Map map = basicGrid();
@@ -93,7 +93,7 @@ public class Levels {
 		Wires wire1fridge1 = new Wires(new Position(6, 9), fridge1, 1, 4);
 		Wires wire2fridge1 = new Wires(new Position(7, 9), fridge1, 2, 1);
 		Wires wire1oven1 = new Wires(new Position(1, 3), oven1, 1, 1);
-		Wires wire2oven1 = new Wires(new Position(1, 4), oven1, 2, 2);
+		Wires wire2oven1 = new Wires(new Position(0, 3), oven1, 3, 2);
 		Wires wire1toaster1 = new Wires(new Position(9, 1), toaster1, 1, 1);
 		Wires wire2toaster1 = new Wires(new Position(9, 2), toaster1, 2, 3);
 		
@@ -111,7 +111,7 @@ public class Levels {
 		appliances.add(fridge1);
 		appliances.add(fan1);
 		
-		return new Level(map, wires, appliances);
+		return new Level(map, wires, appliances, new ArrayList<Position>());
 	}
 	public static Map basicGrid() {
 		Map map = new Map();

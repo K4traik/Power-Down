@@ -9,8 +9,7 @@ import entity.Oven;
 import entity.Toaster;
 import entity.Vacuum;
 import entity.Wires;
-import exceptions.InvalidInputException;
-import exceptions.InvalidPositionException;
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.text.Font;
@@ -37,17 +36,16 @@ public class GameLevel extends Application{
 	private Image vacuumSprite;
 	private Image laptopSprite;
 	private Image toasterSprite;
-	private Image explosion1;
-	private Image explosion2;
-	private Image explosion3;
-	private Image explosion4;
-	private Image explosion5;
-	private Image explosion6;
+	private Image[] explosion = new Image[6];
 	private Image toastSprite;
 	private Image fireSprite;
 	private Image frozenSprite;
 	private Image iceSprite;
 	private Image windSprite;
+	
+	private int explosionFrame = 0;
+	private long lastExplosionUpdate = 0;
+	private boolean isExploding = false;
 	
 	public GameLevel(LevelManager lM) {
 		this.setlM(lM);
@@ -59,39 +57,48 @@ public class GameLevel extends Application{
 	
 	public void drawMap(GraphicsContext gc) {
 		for(Position p:lM.getLevel().getMap().getPositions()) {
-			gc.drawImage(floorTile, p.x*32, p.y*32);
+			gc.drawImage(floorTile, p.getX()*32, p.getY()*32);
 		}
 	}
 	public void drawAppliances(GraphicsContext gc) {
 		for(Appliance a:lM.getLevel().getAppliances()) {
-			if(a instanceof Fan) {
-				gc.drawImage(fanSprite, a.getPosition().x*32, a.getPosition().y*32);
-			}else if(a instanceof Oven) {
-				gc.drawImage(ovenSprite, a.getPosition().x*32, a.getPosition().y*32);
-			}else if(a instanceof Fridge) {
-				gc.drawImage(fridgeSprite, a.getPosition().x*32, a.getPosition().y*32);
-			}else if(a instanceof Vacuum) {
-				gc.drawImage(vacuumSprite, a.getPosition().x*32, a.getPosition().y*32);
-			}else if(a instanceof Laptop) {
-				gc.drawImage(laptopSprite, a.getPosition().x*32, a.getPosition().y*32);
-			}else if(a instanceof Toaster) {
-				gc.drawImage(toasterSprite, a.getPosition().x*32, a.getPosition().y*32);
+			if(a.isActive()) {
+				if(a instanceof Fan) {
+					gc.drawImage(fanSprite, a.getPosition().getX()*32, a.getPosition().getY()*32);
+				}else if(a instanceof Oven) {
+					gc.drawImage(ovenSprite, a.getPosition().getX()*32, a.getPosition().getY()*32);
+				}else if(a instanceof Fridge) {
+					gc.drawImage(fridgeSprite, a.getPosition().getX()*32, a.getPosition().getY()*32);
+				}else if(a instanceof Vacuum) {
+					gc.drawImage(vacuumSprite, a.getPosition().getX()*32, a.getPosition().getY()*32);
+				}else if(a instanceof Laptop) {
+					gc.drawImage(laptopSprite, a.getPosition().getX()*32, a.getPosition().getY()*32);
+				}else if(a instanceof Toaster) {
+				gc.drawImage(toasterSprite, a.getPosition().getX()*32, a.getPosition().getY()*32);
+				}
 			}
 		}
 	}
 	public void drawWires(GraphicsContext gc) {
 		for(Wires w:lM.getLevel().getWires()) {
 			if(w.getVariation() == 3) {
-				gc.drawImage(wireSprite3, w.getPosition().x*32, w.getPosition().y*32);
+				gc.drawImage(wireSprite3, w.getPosition().getX()*32, w.getPosition().getY()*32);
 			}else if(w.getVariation() == 2) {
-				gc.drawImage(wireSprite2, w.getPosition().x*32, w.getPosition().y*32);
+				gc.drawImage(wireSprite2, w.getPosition().getX()*32, w.getPosition().getY()*32);
 			}else if(w.getVariation() == 1) {
-				gc.drawImage(wireSprite1, w.getPosition().x*32, w.getPosition().y*32);
+				gc.drawImage(wireSprite1, w.getPosition().getX()*32, w.getPosition().getY()*32);
 			}
 		}
 	}
 	public void drawPlayer(GraphicsContext gc) {
-		gc.drawImage(playerSprite, lM.getPlayer().getPosition().x*32, lM.getPlayer().getPosition().y*32);
+		gc.drawImage(playerSprite, lM.getPlayer().getPosition().getX()*32, lM.getPlayer().getPosition().getY()*32);
+	}
+	public void drawExplosions(GraphicsContext gc) {
+		if (isExploding && lM.getLevel().getExplosions() != null) {
+			for (Position p : lM.getLevel().getExplosions()) {
+				gc.drawImage(explosion[explosionFrame], p.getX() * 32, p.getY() * 32);
+			}
+		}
 	}
 	@Override
 	public void start(Stage primaryStage) {
@@ -107,34 +114,68 @@ public class GameLevel extends Application{
             vacuumSprite = new Image(getClass().getResourceAsStream("/vacuum.png"));
             laptopSprite = new Image(getClass().getResourceAsStream("/laptop.png"));
             toasterSprite = new Image(getClass().getResourceAsStream("/toaster.png"));
-            explosion1 = new Image(getClass().getResourceAsStream("/explosion1.png"));
-            explosion2 = new Image(getClass().getResourceAsStream("/explosion2.png"));
-            explosion3 = new Image(getClass().getResourceAsStream("/explosion3.png"));
-            explosion4 = new Image(getClass().getResourceAsStream("/explosion4.png"));
-            explosion5 = new Image(getClass().getResourceAsStream("/explosion5.png"));
-            explosion6 = new Image(getClass().getResourceAsStream("/explosion6.png"));
+            explosion[0] = new Image(getClass().getResourceAsStream("/explosion1.png"));
+            explosion[1] = new Image(getClass().getResourceAsStream("/explosion2.png"));
+            explosion[2] = new Image(getClass().getResourceAsStream("/explosion3.png"));
+            explosion[3] = new Image(getClass().getResourceAsStream("/explosion4.png"));
+            explosion[4] = new Image(getClass().getResourceAsStream("/explosion5.png"));
+            explosion[5] = new Image(getClass().getResourceAsStream("/explosion6.png"));
             toastSprite = new Image(getClass().getResourceAsStream("/toast.png"));
             fireSprite = new Image(getClass().getResourceAsStream("/fire.png"));
             frozenSprite = new Image(getClass().getResourceAsStream("/frozen.png"));
             iceSprite = new Image(getClass().getResourceAsStream("/ice.png"));
             windSprite = new Image(getClass().getResourceAsStream("/wind.png"));
-        } catch (Exception e) {
+        }catch (Exception e) {
             System.out.println("Error al cargar las imágenes desde resources: " + e.getMessage());
         }
 		lM.start();
 		
 		Button btnGoBack = createButton("Volver");
 		
-		btnGoBack.setOnAction(e -> {
+		btnGoBack.setOnAction(_ -> {
             new GameMenu().start(primaryStage);
         });
 		
 		Canvas canvas = new Canvas(10*32, 10 *32);
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		drawMap(gc);
-		drawAppliances(gc);
 		drawWires(gc);
+		drawAppliances(gc);
 		drawPlayer(gc);
+		
+		AnimationTimer gameLoop = new AnimationTimer() {
+			@Override
+			public void handle(long now) {
+				if (isExploding && (now - lastExplosionUpdate >= 120_000_000L)) {
+					explosionFrame++;
+					lastExplosionUpdate = now;
+					if (explosionFrame >= explosion.length) {
+						explosionFrame = 0;
+						isExploding = false;
+						
+						if (lM.getLevel().getExplosions() != null) {
+		                    lM.getLevel().getExplosions().clear();
+		                    
+		                    if(lM.checkWin()) {
+		                    	try {
+									new WinMenu(lM).start(primaryStage);
+								} catch (Exception e) {
+									e.printStackTrace();
+								} 
+		                    }
+		                }
+					}
+					
+					gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+					drawMap(gc);
+					drawWires(gc);
+					drawAppliances(gc);
+					drawPlayer(gc);
+					drawExplosions(gc);
+				}
+			}
+		};
+		gameLoop.start();
 		
 		VBox menu = new VBox(20);
         menu.setAlignment(Pos.BOTTOM_CENTER);
@@ -150,44 +191,58 @@ public class GameLevel extends Application{
         primaryStage.show();
         
         scene.setOnKeyPressed(e -> {
-        	if (lM.getTurn() >= 100) {
-        		lM.nextLevel();
-        	}
+        	if (isExploding) {
+                return; 
+            }
         	
-        	try {
-            	boolean moved = false;
+            boolean moved = false;
             	
-            	switch(e.getCode()) {
-            	case W, UP:
-            		lM.nextTurn(1);
-            		moved = true;
-            		break;
-            	case D, RIGHT:
-            		lM.nextTurn(2);
-            		moved = true;
-            		break;
-            	case S, DOWN:
-            		lM.nextTurn(3);
-            		moved = true;
-            		break;
-            	case A, LEFT:
-            		lM.nextTurn(4);
-            		moved = true;
-            		break;
-            	}
+            switch(e.getCode()) {
+            case W:
+            	lM.playerAct(1);
+            	moved = true;
+            	break;
+           	case D:
+           		lM.playerAct(2);
+           		moved = true;
+           		break;
+           	case S:
+           		lM.playerAct(3);
+           		moved = true;
+           		break;
+           	case A:
+           		lM.playerAct(4);
+           		moved = true;
+           		break;
+           	case ESCAPE:
+			default:
+				break;
+            }
             	
-            	if (moved) {
-            		gc.clearRect(0, 0, 320, 320);
-            		drawMap(gc);
-            		drawAppliances(gc);
-            		drawWires(gc);
-            		drawPlayer(gc);
-            		
-            		System.out.println("Turno actual: " + lM.getTurn());
-            	}
-        	}catch (InvalidInputException | InvalidPositionException ex) {
-        		ex.printStackTrace();
-        	}
+           	if (moved) {
+           		if (lM.getLevel().getExplosions() != null && !lM.getLevel().getExplosions().isEmpty()) {
+           			isExploding = true;
+           			explosionFrame = 0;
+           			lastExplosionUpdate = System.nanoTime();
+           		}else {
+           			if(lM.checkLose()) {
+                		try {
+    						new LoseMenu(lM).start(primaryStage);
+    					} catch (Exception e1) {
+    						e1.printStackTrace();
+    					}
+                	}
+           		}
+           		
+           		gc.clearRect(0, 0, 320, 320);
+           		drawMap(gc);
+           		drawWires(gc);
+           		drawAppliances(gc);
+            	drawPlayer(gc);
+            	drawExplosions(gc);
+            	
+            	System.out.println("Turno actual: " + lM.getTurn());
+            }
         });
 	}
 	
@@ -202,13 +257,13 @@ public class GameLevel extends Application{
             "-fx-background-radius: 8;"
         );
 
-        btn.setOnMouseEntered(e -> btn.setStyle(
+        btn.setOnMouseEntered(_ -> btn.setStyle(
             "-fx-background-color: #5fcde4; " +
             "-fx-text-fill: black; " +
             "-fx-background-radius: 8;"
         ));
         
-        btn.setOnMouseExited(e -> btn.setStyle(
+        btn.setOnMouseExited(_ -> btn.setStyle(
             "-fx-background-color: #639bff; " +
             "-fx-text-fill: black; " +
             "-fx-background-radius: 8;"

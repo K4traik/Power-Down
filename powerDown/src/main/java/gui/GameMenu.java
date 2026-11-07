@@ -31,18 +31,18 @@ public class GameMenu extends Application {
         Button btnSaves = createButton("Sesiones");
         Button btnLeave = createButton("Salir");
 
-        btnPlay.setOnAction(e -> {
+        btnPlay.setOnAction(_ -> {
             new GameLevel(lM).start(primaryStage);
         });
 
-        btnSaves.setOnAction(e -> {
+        btnSaves.setOnAction(_ -> {
             System.out.println("Abriendo menú de sesiones...");
             new SessionMenu().mostrarSesiones(primaryStage, () -> {
                 this.start(primaryStage); 
                 });
         });
 
-        btnLeave.setOnAction(e -> primaryStage.close());
+        btnLeave.setOnAction(_ -> primaryStage.close());
 
         VBox menu = new VBox(20);
         menu.setAlignment(Pos.CENTER);
@@ -59,29 +59,26 @@ public class GameMenu extends Application {
     }
 
     private Button createButton(String text) {
-        Button btn = new Button(text);
-        btn.setPrefWidth(200);
-        btn.setPrefHeight(40);
-        btn.setFont(new Font("Roboto", 16));
-        btn.setStyle(
-            "-fx-background-color: #5b6ee1; " +
-            "-fx-text-fill: black; " +
-            "-fx-background-radius: 8;"
-        );
-
-        btn.setOnMouseEntered(e -> btn.setStyle(
-            "-fx-background-color: #5fcde4; " +
-            "-fx-text-fill: black; " +
-            "-fx-background-radius: 8;"
-        ));
-        
-        btn.setOnMouseExited(e -> btn.setStyle(
-            "-fx-background-color: #639bff; " +
-            "-fx-text-fill: black; " +
-            "-fx-background-radius: 8;"
-        ));
-
-        return btn;
+    	Button btn = new Button(text);
+    	btn.setPrefWidth(200);
+    	btn.setPrefHeight(40);
+    	btn.setFont(new Font("Roboto", 16));
+    	btn.setStyle(
+    			"-fx-background-color: #5b6ee1; " +
+    					"-fx-text-fill: black; " +
+    					"-fx-background-radius: 8;"
+    			);
+    	btn.setOnMouseEntered(_ -> btn.setStyle(
+    			"-fx-background-color: #5fcde4; " +
+    					"-fx-text-fill: black; " +
+    					"-fx-background-radius: 8;"
+    			));
+    	btn.setOnMouseExited(_ -> btn.setStyle(
+    			"-fx-background-color: #639bff; " +
+    					"-fx-text-fill: black; " +
+    					"-fx-background-radius: 8;"
+    			));
+    	return btn;
     }
     
 	public LevelManager getLevelManager() {

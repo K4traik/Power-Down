@@ -5,15 +5,11 @@ import entity.Human;
 import entity.Wires;
 import exceptions.IdOutOfBoundsException;
 import exceptions.InactiveSessionException;
-import exceptions.InvalidInputException;
-import exceptions.InvalidPositionException;
 import exceptions.SessionNotFoundException;
 import interfaces.Actionable;
 import map.Levels;
 import map.Level;
 import service.SessionProgressionService;
-
-import java.util.Scanner;
 
 import components.Position;
 
@@ -31,26 +27,40 @@ public class LevelManager{
 	}
 	
 	public void start() {
-		player = new Human(new Position(0, 0), 5);
+		player = new Human(new Position(0, 0), 1);
 		updateLevel();
 		turn = 0;
 	}
-	
-	public void nextTurn(int input) throws InvalidInputException, InvalidPositionException{
-		playerAct(input);
-		turn++;
+	public boolean checkWin() {
+		boolean flag = true;
+		for(Appliance a:level.getAppliances()) {
+			if(a.isActive()) {
+				flag = false;
+			}
+		}
+		return flag;
 	}
-	
+	public boolean checkLose() {
+		boolean flag = false;
+		if(player.getHealth()<=0) {
+			flag = true;
+		}
+		if(turn >= 100) {
+			flag = true;
+		}
+		return flag;
+	}
+	public void nextTurn() {
+		turn++;
+		appliancesAct();
+	}
 	public void nextLevel() {
 		if(currentLevel<3) {
 			currentLevel++;
-			start();
-		}else {
-			System.out.println("Juego completado!");
 		}
 	}
-	public void playerAct(int input) throws InvalidInputException, InvalidPositionException {
-		Position nextPos;
+	public void playerAct(int input){
+		Position nextPos = null;
 		switch(input) {
 		case 1:
 			nextPos = player.walkNorth();
@@ -64,42 +74,44 @@ public class LevelManager{
 		case 4:
 			nextPos = player.walkWest();
 			break;
-		default:
-			throw new InvalidInputException("El valor ingresado no corresponde a ninguna dirección.");
 		}
-		if (checkPositionMap(nextPos)) {
-			throw new InvalidPositionException("El jugador intentó moverse a una pared.");
-		} 
-		Wires wire = checkPositionWires(nextPos);
-		if (wire != null) {
-			wire.steppedOn();
-		} 
-		if (checkPositionAppliances(nextPos)) {
-			throw new InvalidPositionException("El jugador intentó moverse a un electrodoméstico.");
+		if(nextPos!=null) {
+			if (!checkPositionMap(nextPos)) {
+				System.out.println("muro");
+				player.move(player.getPosition());
+			}else if (checkPositionAppliances(nextPos)) {
+				System.out.println("appliance");
+				player.move(player.getPosition());
+			}else {
+				Wires wire = checkPositionWires(nextPos);
+				if(wire != null) {
+					if(wire.getAppliance().isActive()) {
+						level.addExplosion(wire.getAppliance().getPosition());
+						wire.steppedOn();
+					}
+				}
+				player.move(nextPos);
+				nextTurn();
+			}
 		}
-		player.move(nextPos);
 	}
 	public void appliancesAct() {
 		for(Appliance a:level.getAppliances()	) {
-			if(a instanceof Actionable) {
-				((Actionable) a).act();
+			if(a.isActive()) {
+				if(a instanceof Actionable) {
+					((Actionable) a).act(level, player);
+				}
 			}
 		}
 	}
 	
 	public boolean checkPositionMap(Position p) {
-		boolean flag = false;
-		for(Position np:level.getMap().getPositions()) {
-			if(np == p) {
-				flag = true;
-			}
-		}
-		return flag;
+		return level.getMap().isPositionAvailable(p);
 	}
 	
 	public Wires checkPositionWires(Position p) {
 		for(Wires w:level.getWires()) {
-			if(w.getPosition() == p) {
+			if(w.getPosition().comparePosition(p)) {
 				return w;
 			}
 		}
@@ -109,7 +121,7 @@ public class LevelManager{
 	public boolean checkPositionAppliances(Position p) {
 		boolean flag = false;
 		for(Appliance a:level.getAppliances()) {
-			if(a.getPosition() == p) {
+			if(a.getPosition().comparePosition(p)) {
 				flag = true;
 			}
 		}
@@ -129,31 +141,28 @@ public class LevelManager{
 	public void updateLevel() {
 		setLevel(Levels.getLevel(currentLevel));
 	}
+	
 	public int getCurrentLevel() {
 		return currentLevel;
 	}
 	public Human getPlayer() {
 		return player;
 	}
-	
 	public void setPlayer(Human player) {
 		this.player = player;
 	}
 	public int getTurn() {
 		return turn;
 	}
-	
 	public void setTurn(int turn) {
 		this.turn = turn;
 	}
 	public void setCurrentLevel(int currentLevel) {
 		this.currentLevel = currentLevel;
 	}
-
 	public Level getLevel() {
 		return level;
 	}
-
 	public void setLevel(Level level) {
 		this.level = level;
 	}

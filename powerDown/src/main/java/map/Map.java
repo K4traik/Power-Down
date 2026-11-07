@@ -12,7 +12,7 @@ public class Map {
 	
 	public boolean isPositionAvailable(Position position) {
         for(Position p:positions) {
-        	if(p==position) {
+        	if(p.getX() == position.getX() && p.getY() == position.getY()) {
         		return true;
         	}
         }

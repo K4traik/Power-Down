@@ -13,33 +13,23 @@ public abstract class Appliance extends Entity{
     }
 	
 	public void logicMoved() {
-		
+		// para electrodomesticos q se muevan
 	}
-	
 	public void leaveWires() {	
-		
+		// lo mismo que arriba
 	}
-	
-	public boolean getActive() {
-		return active;
-	}
-	
 	public void setActive(boolean active) {
 		this.active = active;
 	}
-	
 	public boolean isActive() {
 		return active;
 	}
-	
-	public void turnOff() {
+	public void explode() {
 		this.active = false;
 	}
-	
 	public int getFacing() {
 		return facing;
 	}
-	
 	public void setFacing(int facing) {
 		this.facing = facing;
 	}

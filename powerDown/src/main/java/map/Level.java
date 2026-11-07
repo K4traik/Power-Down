@@ -2,6 +2,7 @@ package map;
 
 import java.util.ArrayList;
 
+import components.Position;
 import entity.Appliance;
 import entity.Wires;
 
@@ -9,11 +10,13 @@ public class Level {
 	private Map map;
 	private ArrayList<Wires> wires;
 	private ArrayList<Appliance> appliances;
+	private ArrayList<Position> explosions;
 	
-	public Level(Map map, ArrayList<Wires> wires, ArrayList<Appliance> appliances) {
+	public Level(Map map, ArrayList<Wires> wires, ArrayList<Appliance> appliances, ArrayList<Position> explosions) {
 		setMap(map);
 		setWires(wires);
 		setAppliances(appliances);
+		setExplosions(explosions);
 	}
 	
 	public Map getMap() {
@@ -39,5 +42,14 @@ public class Level {
 	}
 	public void addAppliance(Appliance appliance) {
 		appliances.add(appliance);
+	}
+	public ArrayList<Position> getExplosions() {
+		return explosions;
+	}
+	public void setExplosions(ArrayList<Position> explosions) {
+		this.explosions = explosions;
+	}
+	public void addExplosion(Position e) {
+		explosions.add(e);
 	}
 }

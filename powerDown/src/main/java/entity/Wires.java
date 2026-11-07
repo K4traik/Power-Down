@@ -16,7 +16,7 @@ public class Wires extends Entity{
     }
 	
 	public void steppedOn() {
-		getAppliance().turnOff();
+		getAppliance().explode();
 	}
 	public Appliance getAppliance() {
 		return appliance;
