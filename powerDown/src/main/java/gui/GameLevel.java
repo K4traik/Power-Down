@@ -26,16 +26,16 @@ import javafx.scene.layout.VBox;
 public class GameLevel extends Application{
 	private LevelManager lM;
 	private Image floorTile;
-	private Image wireSprite1;
-	private Image wireSprite2;
-	private Image wireSprite3;
+	private Image[] shortWire = new Image[4];
+	private Image[] longWire = new Image[4];
+	private Image[] curvedWire = new Image[4];
 	private Image playerSprite;
-	private Image fanSprite;
-	private Image ovenSprite;
-	private Image fridgeSprite;
+	private Image[] fanSprite = new Image[4];
+	private Image[] ovenSprite = new Image[4];
+	private Image[] fridgeSprite = new Image[4];
 	private Image vacuumSprite;
 	private Image laptopSprite;
-	private Image toasterSprite;
+	private Image[] toasterSprite = new Image[4];
 	private Image[] explosion = new Image[6];
 	private Image toastSprite;
 	private Image fireSprite;
@@ -64,17 +64,17 @@ public class GameLevel extends Application{
 		for(Appliance a:lM.getLevel().getAppliances()) {
 			if(a.isActive()) {
 				if(a instanceof Fan) {
-					gc.drawImage(fanSprite, a.getPosition().getX()*32, a.getPosition().getY()*32);
+					gc.drawImage(fanSprite[a.getFacing()-1], a.getPosition().getX()*32, a.getPosition().getY()*32);
 				}else if(a instanceof Oven) {
-					gc.drawImage(ovenSprite, a.getPosition().getX()*32, a.getPosition().getY()*32);
+					gc.drawImage(ovenSprite[a.getFacing()-1], a.getPosition().getX()*32, a.getPosition().getY()*32);
 				}else if(a instanceof Fridge) {
-					gc.drawImage(fridgeSprite, a.getPosition().getX()*32, a.getPosition().getY()*32);
+					gc.drawImage(fridgeSprite[a.getFacing()-1], a.getPosition().getX()*32, a.getPosition().getY()*32);
 				}else if(a instanceof Vacuum) {
 					gc.drawImage(vacuumSprite, a.getPosition().getX()*32, a.getPosition().getY()*32);
 				}else if(a instanceof Laptop) {
 					gc.drawImage(laptopSprite, a.getPosition().getX()*32, a.getPosition().getY()*32);
 				}else if(a instanceof Toaster) {
-				gc.drawImage(toasterSprite, a.getPosition().getX()*32, a.getPosition().getY()*32);
+				gc.drawImage(toasterSprite[a.getFacing()-1], a.getPosition().getX()*32, a.getPosition().getY()*32);
 				}
 			}
 		}
@@ -82,11 +82,11 @@ public class GameLevel extends Application{
 	public void drawWires(GraphicsContext gc) {
 		for(Wires w:lM.getLevel().getWires()) {
 			if(w.getVariation() == 3) {
-				gc.drawImage(wireSprite3, w.getPosition().getX()*32, w.getPosition().getY()*32);
+				gc.drawImage(longWire[w.getFacing()-1], w.getPosition().getX()*32, w.getPosition().getY()*32);
 			}else if(w.getVariation() == 2) {
-				gc.drawImage(wireSprite2, w.getPosition().getX()*32, w.getPosition().getY()*32);
+				gc.drawImage(curvedWire[w.getFacing()-1], w.getPosition().getX()*32, w.getPosition().getY()*32);
 			}else if(w.getVariation() == 1) {
-				gc.drawImage(wireSprite1, w.getPosition().getX()*32, w.getPosition().getY()*32);
+				gc.drawImage(shortWire[w.getFacing()-1], w.getPosition().getX()*32, w.getPosition().getY()*32);
 			}
 		}
 	}
@@ -100,34 +100,48 @@ public class GameLevel extends Application{
 			}
 		}
 	}
+	private Image cargarImagen(String path) {
+	    var stream = getClass().getResourceAsStream(path);
+	    if (stream == null) {
+	        System.out.println("❌ NO SE ENCONTRÓ EL ARCHIVO: " + path);
+	    }
+	    return new Image(stream);
+	}
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-            floorTile = new Image(getClass().getResourceAsStream("/tile1.png"));
-            wireSprite1 = new Image(getClass().getResourceAsStream("/wire.png"));
-            wireSprite2 = new Image(getClass().getResourceAsStream("/wire2.png"));
-            wireSprite3 = new Image(getClass().getResourceAsStream("/wire3.png"));
-            playerSprite = new Image(getClass().getResourceAsStream("/puerro_boy.png"));
-            fanSprite = new Image(getClass().getResourceAsStream("/fan.png"));
-            ovenSprite = new Image(getClass().getResourceAsStream("/oven.png"));
-            fridgeSprite = new Image(getClass().getResourceAsStream("/fridge.png"));
-            vacuumSprite = new Image(getClass().getResourceAsStream("/vacuum.png"));
-            laptopSprite = new Image(getClass().getResourceAsStream("/laptop.png"));
-            toasterSprite = new Image(getClass().getResourceAsStream("/toaster.png"));
-            explosion[0] = new Image(getClass().getResourceAsStream("/explosion1.png"));
-            explosion[1] = new Image(getClass().getResourceAsStream("/explosion2.png"));
-            explosion[2] = new Image(getClass().getResourceAsStream("/explosion3.png"));
-            explosion[3] = new Image(getClass().getResourceAsStream("/explosion4.png"));
-            explosion[4] = new Image(getClass().getResourceAsStream("/explosion5.png"));
-            explosion[5] = new Image(getClass().getResourceAsStream("/explosion6.png"));
-            toastSprite = new Image(getClass().getResourceAsStream("/toast.png"));
-            fireSprite = new Image(getClass().getResourceAsStream("/fire.png"));
-            frozenSprite = new Image(getClass().getResourceAsStream("/frozen.png"));
-            iceSprite = new Image(getClass().getResourceAsStream("/ice.png"));
-            windSprite = new Image(getClass().getResourceAsStream("/wind.png"));
-        }catch (Exception e) {
-            System.out.println("Error al cargar las imágenes desde resources: " + e.getMessage());
-        }
+		    floorTile = cargarImagen("/tile1.png");
+		    playerSprite = cargarImagen("/puerro_boy.png");
+		    vacuumSprite = cargarImagen("/vacuum.png");
+		    laptopSprite = cargarImagen("/laptop.png");
+		    
+		    for(int i = 0; i < 6; i++) {
+		        explosion[i] = cargarImagen("/explosion" + (i + 1) + ".png");
+		    }
+		    
+		    toastSprite = cargarImagen("/toast.png");
+		    fireSprite = cargarImagen("/fire.png");
+		    frozenSprite = cargarImagen("/frozen.png");
+		    iceSprite = cargarImagen("/ice.png");
+		    windSprite = cargarImagen("/wind.png");
+		    
+		    longWire[0] = cargarImagen("/wires/longwire1.png");
+		    longWire[1] = cargarImagen("/wires/longwire2.png");
+		    
+		    for(int i = 0; i < 4; i++) {
+		        // ¡OJO ACÁ! Si tus archivos empiezan en 1 (ej: shortwire1.png), 
+		        // usar 'i' tirará error cuando i = 0 porque buscará "shortwire0.png".
+		        shortWire[i] = cargarImagen("/wires/shortwire" + (i + 1) + ".png");
+		        curvedWire[i] = cargarImagen("/wires/curvedwire" + (i + 1) + ".png");
+		        toasterSprite[i] = cargarImagen("/toaster/toaster" + (i + 1) + ".png");
+		        ovenSprite[i] = cargarImagen("/oven/oven" + (i + 1) + ".png");
+		        fanSprite[i] = cargarImagen("/fan/fan" + (i + 1) + ".png"); // ¿Estaba dentro de una carpeta /fan/?
+		        fridgeSprite[i] = cargarImagen("/fridge/fridge" + (i + 1) + ".png");
+		    }
+		} catch (Exception e) {
+		    System.out.println("Error al cargar una imagen: " + e.getMessage());
+		    e.printStackTrace(); // Esto te mostrará la línea exacta donde falló
+		}
 		lM.start();
 		
 		Button btnGoBack = createButton("Volver");

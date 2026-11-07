@@ -20,7 +20,7 @@ public class Levels {
 		
 		Wires wire1fan1 = new Wires(new Position(4, 8), fan1, 1, 1);
 		Wires wire2fan1 = new Wires(new Position(4, 9), fan1, 3, 1);
-		Wires wire1oven1 = new Wires(new Position(5, 1), oven1, 1, 2);
+		Wires wire1oven1 = new Wires(new Position(5, 1), oven1, 1, 4);
 		Wires wire2oven1 = new Wires(new Position(6, 1), oven1, 3, 2);
 		Wires wire3oven1 = new Wires(new Position(7, 1), oven1, 3, 2);
 		Wires wire4oven1 = new Wires(new Position(8, 1), oven1, 3, 2);
@@ -53,12 +53,12 @@ public class Levels {
 		Wires wire1toaster2 = new Wires(new Position(2, 0), toaster2, 1, 4);
 		Wires wire2toaster2 = new Wires(new Position(3, 0), toaster2, 2, 2);
 		Wires wire1fridge1 = new Wires(new Position(3, 2), fridge1, 1, 4);
-		Wires wire2fridge1 = new Wires(new Position(4, 2), fridge1, 3, 4);
-		Wires wire3fridge1 = new Wires(new Position(5, 2), fridge1, 3, 4);
-		Wires wire4fridge1 = new Wires(new Position(6, 2), fridge1, 3, 4);
-		Wires wire5fridge1 = new Wires(new Position(7, 2), fridge1, 3, 4);
-		Wires wire6fridge1 = new Wires(new Position(8, 2), fridge1, 3, 4);
-		Wires wire7fridge1 = new Wires(new Position(9, 2), fridge1, 3, 4);
+		Wires wire2fridge1 = new Wires(new Position(4, 2), fridge1, 3, 2);
+		Wires wire3fridge1 = new Wires(new Position(5, 2), fridge1, 3, 2);
+		Wires wire4fridge1 = new Wires(new Position(6, 2), fridge1, 3, 2);
+		Wires wire5fridge1 = new Wires(new Position(7, 2), fridge1, 3, 2);
+		Wires wire6fridge1 = new Wires(new Position(8, 2), fridge1, 3, 2);
+		Wires wire7fridge1 = new Wires(new Position(9, 2), fridge1, 3, 2);
 		
 		wires.add(wire7fridge1);
 		wires.add(wire6fridge1);
