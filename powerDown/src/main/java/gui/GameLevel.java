@@ -110,37 +110,35 @@ public class GameLevel extends Application{
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-		    floorTile = cargarImagen("/tile1.png");
-		    playerSprite = cargarImagen("/puerro_boy.png");
-		    vacuumSprite = cargarImagen("/vacuum.png");
-		    laptopSprite = cargarImagen("/laptop.png");
+		    floorTile = cargarImagen("/tiles/tile1.png");
+		    playerSprite = cargarImagen("/player/puerro_boy.png");
+		    vacuumSprite = cargarImagen("/vacuum/vacuum.png");
+		    laptopSprite = cargarImagen("/laptop/laptop.png");
 		    
 		    for(int i = 0; i < 6; i++) {
-		        explosion[i] = cargarImagen("/explosion" + (i + 1) + ".png");
+		        explosion[i] = cargarImagen("/explosion/explosion" + (i + 1) + ".png");
 		    }
 		    
-		    toastSprite = cargarImagen("/toast.png");
-		    fireSprite = cargarImagen("/fire.png");
-		    frozenSprite = cargarImagen("/frozen.png");
-		    iceSprite = cargarImagen("/ice.png");
-		    windSprite = cargarImagen("/wind.png");
+		    toastSprite = cargarImagen("/projectiles/toast.png");
+		    fireSprite = cargarImagen("/projectiles/fire.png");
+		    frozenSprite = cargarImagen("/effect/frozen.png");
+		    iceSprite = cargarImagen("/projectiles/ice.png");
+		    windSprite = cargarImagen("/projectiles/wind.png");
 		    
 		    longWire[0] = cargarImagen("/wires/longwire1.png");
 		    longWire[1] = cargarImagen("/wires/longwire2.png");
 		    
 		    for(int i = 0; i < 4; i++) {
-		        // ¡OJO ACÁ! Si tus archivos empiezan en 1 (ej: shortwire1.png), 
-		        // usar 'i' tirará error cuando i = 0 porque buscará "shortwire0.png".
 		        shortWire[i] = cargarImagen("/wires/shortwire" + (i + 1) + ".png");
 		        curvedWire[i] = cargarImagen("/wires/curvedwire" + (i + 1) + ".png");
 		        toasterSprite[i] = cargarImagen("/toaster/toaster" + (i + 1) + ".png");
 		        ovenSprite[i] = cargarImagen("/oven/oven" + (i + 1) + ".png");
-		        fanSprite[i] = cargarImagen("/fan/fan" + (i + 1) + ".png"); // ¿Estaba dentro de una carpeta /fan/?
+		        fanSprite[i] = cargarImagen("/fan/fan" + (i + 1) + ".png");
 		        fridgeSprite[i] = cargarImagen("/fridge/fridge" + (i + 1) + ".png");
 		    }
 		} catch (Exception e) {
 		    System.out.println("Error al cargar una imagen: " + e.getMessage());
-		    e.printStackTrace(); // Esto te mostrará la línea exacta donde falló
+		    e.printStackTrace();
 		}
 		lM.start();
 		

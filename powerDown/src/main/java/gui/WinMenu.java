@@ -33,10 +33,10 @@ public class WinMenu extends Application{
         Button btnBack = createButton("Volver al menú");
         Button btnNext = createButton("Siguiente nivel");
         
-        btnBack.setOnAction(_ -> {
+        btnBack.setOnAction(e -> {
         	new GameMenu(lM).start(primaryStage);
         });
-        btnNext.setOnAction(_ -> {
+        btnNext.setOnAction(e -> {
         	new GameLevel(lM).start(primaryStage);
         });
         
@@ -64,12 +64,12 @@ public class WinMenu extends Application{
     					"-fx-text-fill: black; " +
     					"-fx-background-radius: 8;"
     			);
-    	btn.setOnMouseEntered(_ -> btn.setStyle(
+    	btn.setOnMouseEntered(e -> btn.setStyle(
     			"-fx-background-color: #5fcde4; " +
     					"-fx-text-fill: black; " +
     					"-fx-background-radius: 8;"
     			));
-    	btn.setOnMouseExited(_ -> btn.setStyle(
+    	btn.setOnMouseExited(e -> btn.setStyle(
     			"-fx-background-color: #639bff; " +
     					"-fx-text-fill: black; " +
     					"-fx-background-radius: 8;"

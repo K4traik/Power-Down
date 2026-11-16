@@ -25,7 +25,7 @@ public class SessionMenu extends Application{
         btnLoad1.setDisable(false);
         btnDelete.setDisable(false);
         
-        btnLoad1.setOnAction(_ -> {
+        btnLoad1.setOnAction(e -> {
             System.out.println("Cargando partida 1...");
             lM.updateCurrentLevel(1);
             lM.start();
@@ -42,7 +42,7 @@ public class SessionMenu extends Application{
         btnLoad2.setDisable(false);
         btnDelete2.setDisable(false);
         
-        btnLoad2.setOnAction(_ -> {
+        btnLoad2.setOnAction(e -> {
             System.out.println("Cargando partida 2...");
             lM.updateCurrentLevel(2);
             lM.start();
@@ -59,7 +59,7 @@ public class SessionMenu extends Application{
         btnDelete3.setDisable(false);
         btnLoad3.setDisable(false);
         
-        btnLoad3.setOnAction(_ -> {
+        btnLoad3.setOnAction(e -> {
             System.out.println("Cargando partida 3...");
             lM.updateCurrentLevel(3);
             lM.start();
@@ -71,7 +71,7 @@ public class SessionMenu extends Application{
         
         Button btnBack= createButton("volver al menú");
         
-        btnBack.setOnAction(_ -> {
+        btnBack.setOnAction(e -> {
             System.out.println("Volviendo al menú");
             volverMenu.run();
         });
@@ -107,13 +107,13 @@ public class SessionMenu extends Application{
 	            "-fx-background-radius: 8;"
 	        );
 
-	        btn.setOnMouseEntered(_ -> btn.setStyle(
+	        btn.setOnMouseEntered(e -> btn.setStyle(
 	            "-fx-background-color: #5fcde4; " +
 	            "-fx-text-fill: black; " +
 	            "-fx-background-radius: 8;"
 	        ));
 	        
-	        btn.setOnMouseExited(_ -> btn.setStyle(
+	        btn.setOnMouseExited(e -> btn.setStyle(
 	            "-fx-background-color: #639bff; " +
 	            "-fx-text-fill: black; " +
 	            "-fx-background-radius: 8;"
@@ -125,9 +125,9 @@ public class SessionMenu extends Application{
 	        
 	        btn.setStyle(estiloBase);
 
-	        btn.setOnMouseEntered(_ -> btn.setStyle(estiloOscuro));
+	        btn.setOnMouseEntered(e -> btn.setStyle(estiloOscuro));
 	        
-	        btn.setOnMouseExited(_ -> btn.setStyle(estiloBase));
+	        btn.setOnMouseExited(e -> btn.setStyle(estiloBase));
 
 	        return btn;
 	 }

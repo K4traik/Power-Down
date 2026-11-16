@@ -92,7 +92,7 @@ public class Levels {
 		Wires wire2fan1 = new Wires(new Position(4, 9), fan1, 3, 1);
 		Wires wire1fridge1 = new Wires(new Position(6, 9), fridge1, 1, 4);
 		Wires wire2fridge1 = new Wires(new Position(7, 9), fridge1, 2, 1);
-		Wires wire1oven1 = new Wires(new Position(1, 3), oven1, 1, 1);
+		Wires wire1oven1 = new Wires(new Position(1, 3), oven1, 1, 2);
 		Wires wire2oven1 = new Wires(new Position(0, 3), oven1, 3, 2);
 		Wires wire1toaster1 = new Wires(new Position(9, 1), toaster1, 1, 1);
 		Wires wire2toaster1 = new Wires(new Position(9, 2), toaster1, 2, 3);
