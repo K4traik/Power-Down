@@ -31,7 +31,7 @@ public class SessionMenu extends Application{
         btnLoad1.setOnAction(e -> {
             System.out.println("Cargando partida 1...");
             lM.updateCurrentLevel(1);
-            new GameLevel(lM).start(ventana);
+            new GameMenu(lM).start(ventana);
         });
         
         btnSave1.setOnAction(e -> {
@@ -59,7 +59,7 @@ public class SessionMenu extends Application{
         btnLoad2.setOnAction(e -> {
             System.out.println("Cargando partida 2...");
             lM.updateCurrentLevel(2);
-            new GameLevel(lM).start(ventana);
+            new GameMenu(lM).start(ventana);
         });
         
         btnSave2.setOnAction(e -> {
@@ -87,7 +87,7 @@ public class SessionMenu extends Application{
         btnLoad3.setOnAction(e -> {
             System.out.println("Cargando partida 3...");
             lM.updateCurrentLevel(3);
-            new GameLevel(lM).start(ventana);
+            new GameMenu(lM).start(ventana);
         });
         
         btnSave3.setOnAction(e -> {

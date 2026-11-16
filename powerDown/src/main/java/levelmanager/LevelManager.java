@@ -159,12 +159,14 @@ public class LevelManager{
 		}catch(SessionNotFoundException ex) {
 			try {
 				sessionsDB.saveSession(choosenSave, 1);
+				updateCurrentLevel(choosenSave);
 			} catch (InvalidLevelException e) {
 				e.printStackTrace();
 			}
 		}catch(InactiveSessionException ex) {
 			try {
 				sessionsDB.saveSession(choosenSave, 1);
+				updateCurrentLevel(choosenSave);
 			} catch (InvalidLevelException e) {
 				e.printStackTrace();
 			}
