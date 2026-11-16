@@ -25,27 +25,27 @@ public class SessionMenu extends Application{
         Button btnDelete1 = createButton ("eliminar");
         btnLoad1.setDisable(false);
         btnSave1.setDisable(false);
-        btnDelete.setDisable(false);
+        btnDelete1.setDisable(false);
         
         
-        btnLoad1.setOnAction(_ -> {
+        btnLoad1.setOnAction(e -> {
             System.out.println("Cargando partida 1...");
             lM.updateCurrentLevel(1);
             lM.start();
             new GameLevel(lM).start(ventana);
         });
         
-        btnSave1.setOnAction(_ -> {
+        btnSave1.setOnAction(e -> {
             System.out.println("Guardando en partida 1...");
             lM.saveCurrentLevel(1);
         });
         
-        btnDelete1.setOnAction(_ -> {
+        btnDelete1.setOnAction(e -> {
             System.out.println("Eliminando partida 1...");
             lM.deleteSession(1);
         });
         
-        HBox slot1 = new HBox(20, Session1, btnLoad1, btnDelete);
+        HBox slot1 = new HBox(20, Session1, btnLoad1, btnDelete1);
         slot1.setAlignment(Pos.CENTER);
         
         Label Session2= new Label ("partida 2");
@@ -57,19 +57,19 @@ public class SessionMenu extends Application{
         btnSave2.setDisable(false);
         btnDelete2.setDisable(false);
         
-        btnLoad2.setOnAction(_ -> {
+        btnLoad2.setOnAction(e -> {
             System.out.println("Cargando partida 2...");
             lM.updateCurrentLevel(2);
             lM.start();
             new GameLevel(lM).start(ventana);
         });
         
-        btnSave2.setOnAction(_ -> {
+        btnSave2.setOnAction(e -> {
             System.out.println("Guardando en partida 2...");
             lM.saveCurrentLevel(2);
         });
         
-        btnDelete2.setOnAction(_ -> {
+        btnDelete2.setOnAction(e -> {
             System.out.println("Eliminando partida 2...");
             lM.deleteSession(2);
         });
@@ -86,19 +86,19 @@ public class SessionMenu extends Application{
         btnSave3.setDisable(false);
         btnLoad3.setDisable(false);
         
-        btnLoad3.setOnAction(_ -> {
+        btnLoad3.setOnAction(e -> {
             System.out.println("Cargando partida 3...");
             lM.updateCurrentLevel(3);
             lM.start();
             new GameLevel(lM).start(ventana);
         });
         
-        btnSave3.setOnAction(_ -> {
+        btnSave3.setOnAction(e -> {
             System.out.println("Guardando en partida 3...");
             lM.saveCurrentLevel(3);
         });
         
-        btnDelete3.setOnAction(_ -> {
+        btnDelete3.setOnAction(e -> {
             System.out.println("Eliminando partida 3...");
             lM.deleteSession(3);
         });
@@ -108,7 +108,7 @@ public class SessionMenu extends Application{
         
         Button btnBack= createButton("volver al menú");
         
-        btnBack.setOnAction(_ -> {
+        btnBack.setOnAction(e -> {
             System.out.println("Volviendo al menú");
             volverMenu.run();
         });
@@ -144,13 +144,13 @@ public class SessionMenu extends Application{
 	            "-fx-background-radius: 8;"
 	        );
 
-	        btn.setOnMouseEntered(_ -> btn.setStyle(
+	        btn.setOnMouseEntered(e -> btn.setStyle(
 	            "-fx-background-color: #5fcde4; " +
 	            "-fx-text-fill: black; " +
 	            "-fx-background-radius: 8;"
 	        ));
 	        
-	        btn.setOnMouseExited(_ -> btn.setStyle(
+	        btn.setOnMouseExited(e -> btn.setStyle(
 	            "-fx-background-color: #639bff; " +
 	            "-fx-text-fill: black; " +
 	            "-fx-background-radius: 8;"
@@ -162,9 +162,9 @@ public class SessionMenu extends Application{
 	        
 	        btn.setStyle(estiloBase);
 
-	        btn.setOnMouseEntered(_ -> btn.setStyle(estiloOscuro));
+	        btn.setOnMouseEntered(e -> btn.setStyle(estiloOscuro));
 	        
-	        btn.setOnMouseExited(_ -> btn.setStyle(estiloBase));
+	        btn.setOnMouseExited(e -> btn.setStyle(estiloBase));
 
 	        return btn;
 	 }
