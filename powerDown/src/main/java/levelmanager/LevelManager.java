@@ -3,8 +3,10 @@ package levelmanager;
 import entity.Appliance;
 import entity.Human;
 import entity.Wires;
+import exceptions.AlreadyInactiveException;
 import exceptions.IdOutOfBoundsException;
 import exceptions.InactiveSessionException;
+import exceptions.InvalidLevelException;
 import exceptions.SessionNotFoundException;
 import interfaces.Actionable;
 import map.Levels;
@@ -127,13 +129,22 @@ public class LevelManager{
 		}
 		return flag;
 	}
-	public void saveCurrentLevel(int idSession) {
-	    try {
-	        sessionsDB.getSession(idSession).setCurrentLevel(this.currentLevel);
-	    } catch (IdOutOfBoundsException | SessionNotFoundException | InactiveSessionException ex) {
-	        ex.printStackTrace();
-	    }
-	}
+		public void saveCurrentLevel(int idSession) {
+			try {
+				sessionsDB.saveSession(idSession, this.currentLevel);
+			} catch (InvalidLevelException ex) {
+				ex.printStackTrace();
+			}
+		}
+		
+		public void deleteSession(int idSession) {
+			try {
+				sessionsDB.turnOffSession(idSession);
+			} catch (AlreadyInactiveException ex) {
+				ex.printStackTrace();
+			}
+		}
+		
 	public void updateCurrentLevel(int choosenSave) {
 		try {
 			setCurrentLevel(sessionsDB.getSession(choosenSave).getCurrentLevel());

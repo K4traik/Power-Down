@@ -22,7 +22,7 @@ public class SessionMenu extends Application{
         Label Session1= new Label ("partida 1");
         Button btnLoad1 = createButton ("cargar");
         Button btnSave1 = createButton("guardar");
-        Button btnDelete = createButton ("eliminar");
+        Button btnDelete1 = createButton ("eliminar");
         btnLoad1.setDisable(false);
         btnSave1.setDisable(false);
         btnDelete.setDisable(false);
@@ -38,6 +38,11 @@ public class SessionMenu extends Application{
         btnSave1.setOnAction(_ -> {
             System.out.println("Guardando en partida 1...");
             lM.saveCurrentLevel(1);
+        });
+        
+        btnDelete1.setOnAction(_ -> {
+            System.out.println("Eliminando partida 1...");
+            lM.deleteSession(1);
         });
         
         HBox slot1 = new HBox(20, Session1, btnLoad1, btnDelete);
@@ -64,6 +69,11 @@ public class SessionMenu extends Application{
             lM.saveCurrentLevel(2);
         });
         
+        btnDelete2.setOnAction(_ -> {
+            System.out.println("Eliminando partida 2...");
+            lM.deleteSession(2);
+        });
+        
         HBox slot2 = new HBox(20, Session2, btnLoad2, btnDelete2);
         slot2.setAlignment(Pos.CENTER);
 
@@ -86,6 +96,11 @@ public class SessionMenu extends Application{
         btnSave3.setOnAction(_ -> {
             System.out.println("Guardando en partida 3...");
             lM.saveCurrentLevel(3);
+        });
+        
+        btnDelete3.setOnAction(_ -> {
+            System.out.println("Eliminando partida 3...");
+            lM.deleteSession(3);
         });
         
         HBox slot3 = new HBox(20, Session3, btnLoad3, btnDelete3);
