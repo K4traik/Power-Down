@@ -4,10 +4,14 @@ Power Down es un videojuego acerca de "apagar" todos los electrodomésticos que 
 
 ## 🎮 Controles
 
-* **`W`**: moverse una casilla arriba.
-* **`S`**: moverse una casilla abajo.
-* **`D`**: moverse una casilla a la derecha.
-* **`A`**: moverse una casilla a la izquierda.
+* **`W`**: Moverse una casilla arriba.
+
+* **`S`**: Moverse una casilla abajo.
+
+* **`D`**: Moverse una casilla a la derecha.
+
+* **`A`**: Moverse una casilla a la izquierda.
+
 * Usa el ratón para tocar los botones en las otras interfaces.
 
 ## 🕶️ Personaje principal
@@ -17,14 +21,29 @@ Es el personaje que parece tener pelo color verde y lleva gafas de sol. Que teng
 ## 🤖 Enemigos
 
 * **🌀 Ventilador:** Te empujará hasta la pared hacia donde esté mirando. Su alcance es todas las casillas que tenga enfrente.
+
 * **🔥 Horno:** Prenderá fuego las tres casillas que tiene delante todos los turnos.
+
 * **❄️ Heladera:** Congelará las tres casillas que tiene enfrente, si el jugador es alcanzado entonces no podrá moverse en el siguiente turno.
-* **🍞 Tostadora:** Lanzará una tostada en linea recta en el turno siguiente al detectar al jugador. Su alcance es todas las casillas que tenga enfrente.
+
+* **🍞 Tostadora:** Lanzará una tostada en línea recta en el turno siguiente al detectar al jugador. Su alcance es todas las casillas que tenga enfrente.
+
 * **💻 Laptop:** Se moverá erráticamente cada 3 turnos, si el jugador está en su alcance lo atacará.
+
 * **🧹 Aspiradora:** Aspirará al personaje hacia ella pero no hace daño. Su alcance es todas las casillas que tenga enfrente.
 
 ## 🛠️ Créditos
 
-* Usamos a Gemini (Google AI) para preguntas sobre la librería y en casos específicos para generar trozos de código que sirvan como ejemplo de como implementar las funciones.
+* Usamos a Gemini (Google AI) para preguntas sobre la librería y en casos específicos para generar trozos de código que sirvan como ejemplo de cómo implementar las funciones.
+
 * El código fue escrito usando Eclipse.
+
 * Los sprites fueron hechos en LibreSprite.
+
+## 💬 Prompts
+
+| Prompt | Motivo | 
+| ----- | ----- | 
+| ¿Cómo puedo crear un proyecto con JavaFX en Eclipse con Maven? Ya tengo toda una jerarquía de clases para la lógica pero quiero manejar lo visual, decime los pasos para hacer por ejemplo un menú. | Este prompt lo hice por dos cosas. Primero, no sabía cómo aclarar las dependencias en el pom.xml. Segundo, no sabía bien cómo poner en práctica lo que había investigado sobre Scene Builder así que Gemini creó básicamente un menú muy básico muy similar al menú principal del juego. | 
+| ¿Cómo puedo "dibujar" una animación de un sprite con varias Image? Dame el método más simple. | Esto lo pregunté para animar las explosiones, el tema es que luego me di cuenta de que sería más complejo. | 
+| ¿Qué podría poner en drawExplosions() teniendo en cuenta que LevelManager tiene un ArrayList<Position> para saber dónde renderizar? El tema es que no sé cómo hacer que ocurra la explosión 1 sola vez y con un tiempo perfecto. | Este prompt fue el segundo para ver lo de las explosiones. | 
