@@ -2,6 +2,23 @@
 
 Power Down es un videojuego acerca de "apagar" todos los electrodomésticos que han perdido el control. Es desarrollado por Eric Quintana (K4traik) y Adriano Benito.
 
+## 🏷️ Versión
+
+Prototipo final. 46 commits.
+
+## 📥 Instrucciones de instalación
+
+1. Descargar e instalar Eclipse.
+2. Descargar e instalar MySQL y MySQLWorkbench.
+3. Crear una conexión con host "localhost", usuario "root" y contraseña "root" en el puerto "3306".
+4. Importar la base de datos a la conexión usando el archivo "Power_Down.sql" del repositorio.
+5. Mantener la conexión de MySQL abierta mientras se ejecuta el juego (últimos 3 pasos).
+6. Abrir el proyecto del repositorio en el IDE. Si no lo reconoce intenten File -> Import -> Maven -> Existing Maven Projects -> pom.xml.
+7. Buscar y entrar a la clase "Launcher" en el paquete "gui".
+8. Presionar el botón "Run" con el símbolo de reproducir.
+9. Disfrutar.
+
+
 ## 🎮 Controles
 
 * **`W`**: Moverse una casilla arriba.
