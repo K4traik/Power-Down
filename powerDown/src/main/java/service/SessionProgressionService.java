@@ -48,7 +48,6 @@ public class SessionProgressionService {
 		}
 		return s;
 	}
-	
 	public void turnOffSession(int id) throws AlreadyInactiveException{
 		try {
 			SessionProgression s = getSession(id);
@@ -59,9 +58,17 @@ public class SessionProgressionService {
 		}catch(IdOutOfBoundsException ex) {
 			System.out.println(ex.getMessage());
 		}catch(SessionNotFoundException ex) {
-			System.out.println(ex.getMessage());
-		}catch(InactiveSessionException ex) {
-			System.out.println(ex.getMessage());
+			try {
+				saveSession(id, 1);
+			}catch(InvalidLevelException ex2) {
+				ex2.printStackTrace();
+			}
+		}catch(InactiveSessionException ex2) {
+			try {
+				saveSession(id, 1);
+			}catch(InvalidLevelException ex) {
+				ex2.printStackTrace();
+			}
 		}
 	}
 	

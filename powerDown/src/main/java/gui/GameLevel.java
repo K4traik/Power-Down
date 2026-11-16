@@ -147,7 +147,7 @@ public class GameLevel extends Application{
 		Button btnGoBack = createButton("Volver");
 		
 		btnGoBack.setOnAction(e -> {
-            new GameMenu().start(primaryStage);
+            new GameMenu(lM).start(primaryStage);
         });
 		
 		Canvas canvas = new Canvas(10*32, 10 *32);

@@ -157,9 +157,17 @@ public class LevelManager{
 		}catch(IdOutOfBoundsException ex) {
 			ex.printStackTrace();
 		}catch(SessionNotFoundException ex) {
-			ex.printStackTrace();
+			try {
+				sessionsDB.saveSession(choosenSave, 1);
+			} catch (InvalidLevelException e) {
+				e.printStackTrace();
+			}
 		}catch(InactiveSessionException ex) {
-			ex.printStackTrace();
+			try {
+				sessionsDB.saveSession(choosenSave, 1);
+			} catch (InvalidLevelException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	public void updateLevel() {
