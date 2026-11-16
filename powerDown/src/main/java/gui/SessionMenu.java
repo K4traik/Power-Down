@@ -31,7 +31,6 @@ public class SessionMenu extends Application{
         btnLoad1.setOnAction(e -> {
             System.out.println("Cargando partida 1...");
             lM.updateCurrentLevel(1);
-            lM.start();
             new GameLevel(lM).start(ventana);
         });
         
@@ -45,7 +44,7 @@ public class SessionMenu extends Application{
             lM.deleteSession(1);
         });
         
-        HBox slot1 = new HBox(20, Session1, btnLoad1, btnDelete1);
+        HBox slot1 = new HBox(20, Session1, btnSave1, btnLoad1, btnDelete1);
         slot1.setAlignment(Pos.CENTER);
         
         Label Session2= new Label ("partida 2");
@@ -60,7 +59,6 @@ public class SessionMenu extends Application{
         btnLoad2.setOnAction(e -> {
             System.out.println("Cargando partida 2...");
             lM.updateCurrentLevel(2);
-            lM.start();
             new GameLevel(lM).start(ventana);
         });
         
@@ -74,7 +72,7 @@ public class SessionMenu extends Application{
             lM.deleteSession(2);
         });
         
-        HBox slot2 = new HBox(20, Session2, btnLoad2, btnDelete2);
+        HBox slot2 = new HBox(20, Session2, btnSave2, btnLoad2, btnDelete2);
         slot2.setAlignment(Pos.CENTER);
 
         Label Session3= new Label ("partida 3");
@@ -89,7 +87,6 @@ public class SessionMenu extends Application{
         btnLoad3.setOnAction(e -> {
             System.out.println("Cargando partida 3...");
             lM.updateCurrentLevel(3);
-            lM.start();
             new GameLevel(lM).start(ventana);
         });
         
@@ -103,7 +100,7 @@ public class SessionMenu extends Application{
             lM.deleteSession(3);
         });
         
-        HBox slot3 = new HBox(20, Session3, btnLoad3, btnDelete3);
+        HBox slot3 = new HBox(20, Session3, btnSave3, btnLoad3, btnDelete3);
         slot3.setAlignment(Pos.CENTER);
         
         Button btnBack= createButton("volver al menú");

@@ -135,17 +135,17 @@ public class LevelManager{
 		}
 		return flag;
 	}
-		public void saveCurrentLevel(int idSession) {
+		public void saveCurrentLevel(int id) {
 			try {
-				sessionsDB.saveSession(idSession, this.currentLevel);
+				sessionsDB.saveSession(id, this.currentLevel);
 			} catch (InvalidLevelException ex) {
 				ex.printStackTrace();
 			}
 		}
 		
-		public void deleteSession(int idSession) {
+		public void deleteSession(int id) {
 			try {
-				sessionsDB.turnOffSession(idSession);
+				sessionsDB.turnOffSession(id);
 			} catch (AlreadyInactiveException ex) {
 				ex.printStackTrace();
 			}
