@@ -4,7 +4,7 @@ Power Down es un videojuego acerca de "apagar" todos los electrodomésticos que 
 
 ## 🏷️ Versión
 
-Prototipo final. 57 commits.
+Prototipo final. 60 commits (v0.60).
 
 ## 📥 Instrucciones de instalación
 
