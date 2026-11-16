@@ -31,10 +31,10 @@ public class LoseMenu extends Application{
         Button btnBack = createButton("Volver al menú");
         Button btnRetry = createButton("Reintentar");
         
-        btnBack.setOnAction(e -> {
+        btnBack.setOnAction(_ -> {
         	new GameMenu(lM).start(primaryStage);
         });
-        btnRetry.setOnAction(e -> {
+        btnRetry.setOnAction(_ -> {
         	new GameLevel(lM).start(primaryStage);
         });
         
@@ -62,12 +62,12 @@ public class LoseMenu extends Application{
     					"-fx-text-fill: black; " +
     					"-fx-background-radius: 8;"
     			);
-    	btn.setOnMouseEntered(e -> btn.setStyle(
+    	btn.setOnMouseEntered(_ -> btn.setStyle(
     			"-fx-background-color: #5fcde4; " +
     					"-fx-text-fill: black; " +
     					"-fx-background-radius: 8;"
     			));
-    	btn.setOnMouseExited(e -> btn.setStyle(
+    	btn.setOnMouseExited(_ -> btn.setStyle(
     			"-fx-background-color: #639bff; " +
     					"-fx-text-fill: black; " +
     					"-fx-background-radius: 8;"

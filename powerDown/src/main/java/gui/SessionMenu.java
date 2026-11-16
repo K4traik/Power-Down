@@ -21,15 +21,28 @@ public class SessionMenu extends Application{
         
         Label Session1= new Label ("partida 1");
         Button btnLoad1 = createButton ("cargar");
-        Button btnDelete = createButton ("eliminar");
+        Button btnSave1 = createButton("guardar");
+        Button btnDelete1 = createButton ("eliminar");
         btnLoad1.setDisable(false);
+        btnSave1.setDisable(false);
         btnDelete.setDisable(false);
         
-        btnLoad1.setOnAction(e -> {
+        
+        btnLoad1.setOnAction(_ -> {
             System.out.println("Cargando partida 1...");
             lM.updateCurrentLevel(1);
             lM.start();
             new GameLevel(lM).start(ventana);
+        });
+        
+        btnSave1.setOnAction(_ -> {
+            System.out.println("Guardando en partida 1...");
+            lM.saveCurrentLevel(1);
+        });
+        
+        btnDelete1.setOnAction(_ -> {
+            System.out.println("Eliminando partida 1...");
+            lM.deleteSession(1);
         });
         
         HBox slot1 = new HBox(20, Session1, btnLoad1, btnDelete);
@@ -37,16 +50,28 @@ public class SessionMenu extends Application{
         
         Label Session2= new Label ("partida 2");
         Button btnLoad2 = createButton ("cargar");
+        Button btnSave2 = createButton("guardar");
         Button btnDelete2 = createButton ("eliminar");
         
         btnLoad2.setDisable(false);
+        btnSave2.setDisable(false);
         btnDelete2.setDisable(false);
         
-        btnLoad2.setOnAction(e -> {
+        btnLoad2.setOnAction(_ -> {
             System.out.println("Cargando partida 2...");
             lM.updateCurrentLevel(2);
             lM.start();
             new GameLevel(lM).start(ventana);
+        });
+        
+        btnSave2.setOnAction(_ -> {
+            System.out.println("Guardando en partida 2...");
+            lM.saveCurrentLevel(2);
+        });
+        
+        btnDelete2.setOnAction(_ -> {
+            System.out.println("Eliminando partida 2...");
+            lM.deleteSession(2);
         });
         
         HBox slot2 = new HBox(20, Session2, btnLoad2, btnDelete2);
@@ -54,16 +79,28 @@ public class SessionMenu extends Application{
 
         Label Session3= new Label ("partida 3");
         Button btnLoad3 = createButton ("cargar");
+        Button btnSave3 = createButton("guardar");
         Button btnDelete3 = createButton ("eliminar");
 
         btnDelete3.setDisable(false);
+        btnSave3.setDisable(false);
         btnLoad3.setDisable(false);
         
-        btnLoad3.setOnAction(e -> {
+        btnLoad3.setOnAction(_ -> {
             System.out.println("Cargando partida 3...");
             lM.updateCurrentLevel(3);
             lM.start();
             new GameLevel(lM).start(ventana);
+        });
+        
+        btnSave3.setOnAction(_ -> {
+            System.out.println("Guardando en partida 3...");
+            lM.saveCurrentLevel(3);
+        });
+        
+        btnDelete3.setOnAction(_ -> {
+            System.out.println("Eliminando partida 3...");
+            lM.deleteSession(3);
         });
         
         HBox slot3 = new HBox(20, Session3, btnLoad3, btnDelete3);
@@ -71,7 +108,7 @@ public class SessionMenu extends Application{
         
         Button btnBack= createButton("volver al menú");
         
-        btnBack.setOnAction(e -> {
+        btnBack.setOnAction(_ -> {
             System.out.println("Volviendo al menú");
             volverMenu.run();
         });
@@ -98,7 +135,7 @@ public class SessionMenu extends Application{
 
 	 private Button createButton(String text) {
 	        Button btn = new Button(text);
-	        btn.setPrefWidth(200);
+	        btn.setPrefWidth(150);
 	        btn.setPrefHeight(40);
 	        btn.setFont(new Font("Roboto", 16));
 	        btn.setStyle(
@@ -107,13 +144,13 @@ public class SessionMenu extends Application{
 	            "-fx-background-radius: 8;"
 	        );
 
-	        btn.setOnMouseEntered(e -> btn.setStyle(
+	        btn.setOnMouseEntered(_ -> btn.setStyle(
 	            "-fx-background-color: #5fcde4; " +
 	            "-fx-text-fill: black; " +
 	            "-fx-background-radius: 8;"
 	        ));
 	        
-	        btn.setOnMouseExited(e -> btn.setStyle(
+	        btn.setOnMouseExited(_ -> btn.setStyle(
 	            "-fx-background-color: #639bff; " +
 	            "-fx-text-fill: black; " +
 	            "-fx-background-radius: 8;"
@@ -125,9 +162,9 @@ public class SessionMenu extends Application{
 	        
 	        btn.setStyle(estiloBase);
 
-	        btn.setOnMouseEntered(e -> btn.setStyle(estiloOscuro));
+	        btn.setOnMouseEntered(_ -> btn.setStyle(estiloOscuro));
 	        
-	        btn.setOnMouseExited(e -> btn.setStyle(estiloBase));
+	        btn.setOnMouseExited(_ -> btn.setStyle(estiloBase));
 
 	        return btn;
 	 }

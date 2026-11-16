@@ -3,8 +3,10 @@ package levelmanager;
 import entity.Appliance;
 import entity.Human;
 import entity.Wires;
+import exceptions.AlreadyInactiveException;
 import exceptions.IdOutOfBoundsException;
 import exceptions.InactiveSessionException;
+import exceptions.InvalidLevelException;
 import exceptions.SessionNotFoundException;
 import interfaces.Actionable;
 import map.Levels;
@@ -54,58 +56,45 @@ public class LevelManager{
 		turn++;
 		appliancesAct();
 	}
-	public void guardarNivelActual(int idSession) {
-        try {
-            sessionsDB.getSession(idSession).setCurrentLevel(this.currentLevel);
-            System.out.println("Progreso guardado en la sesión " + idSession + " (Nivel " + this.currentLevel + ")");
-        } catch (IdOutOfBoundsException | SessionNotFoundException | InactiveSessionException ex) {
-            ex.printStackTrace();
-        }
-    }
 	public void nextLevel() {
 		if(currentLevel<3) {
 			currentLevel++;
 		}
 	}
 	public void playerAct(int input){
-		if(!player.isFrozen()) {
-			Position nextPos = null;
-			switch(input) {
-			case 1:
-				nextPos = player.walkNorth();
-				break;
-			case 2:
-				nextPos = player.walkEast();
-				break;
-			case 3:
-				nextPos = player.walkSouth();
-				break;
-			case 4:
-				nextPos = player.walkWest();
-				break;
-			}
-			if(nextPos!=null) {
-				if (!checkPositionMap(nextPos)) {
-					System.out.println("muro");
-					player.move(player.getPosition());
-				}else if (checkPositionAppliances(nextPos)) {
-					System.out.println("appliance");
-					player.move(player.getPosition());
-				}else {
-					Wires wire = checkPositionWires(nextPos);
-					if(wire != null) {
-						if(wire.getAppliance().isActive()) {
-							level.addExplosion(wire.getAppliance().getPosition());
-							wire.steppedOn();
-						}
+		Position nextPos = null;
+		switch(input) {
+		case 1:
+			nextPos = player.walkNorth();
+			break;
+		case 2:
+			nextPos = player.walkEast();
+			break;
+		case 3:
+			nextPos = player.walkSouth();
+			break;
+		case 4:
+			nextPos = player.walkWest();
+			break;
+		}
+		if(nextPos!=null) {
+			if (!checkPositionMap(nextPos)) {
+				System.out.println("muro");
+				player.move(player.getPosition());
+			}else if (checkPositionAppliances(nextPos)) {
+				System.out.println("appliance");
+				player.move(player.getPosition());
+			}else {
+				Wires wire = checkPositionWires(nextPos);
+				if(wire != null) {
+					if(wire.getAppliance().isActive()) {
+						level.addExplosion(wire.getAppliance().getPosition());
+						wire.steppedOn();
 					}
-					player.move(nextPos);
-					nextTurn();
 				}
+				player.move(nextPos);
+				nextTurn();
 			}
-		}else {
-			nextTurn();
-			player.setFrozen(false);
 		}
 	}
 	public void appliancesAct() {
@@ -140,6 +129,22 @@ public class LevelManager{
 		}
 		return flag;
 	}
+		public void saveCurrentLevel(int idSession) {
+			try {
+				sessionsDB.saveSession(idSession, this.currentLevel);
+			} catch (InvalidLevelException ex) {
+				ex.printStackTrace();
+			}
+		}
+		
+		public void deleteSession(int idSession) {
+			try {
+				sessionsDB.turnOffSession(idSession);
+			} catch (AlreadyInactiveException ex) {
+				ex.printStackTrace();
+			}
+		}
+		
 	public void updateCurrentLevel(int choosenSave) {
 		try {
 			setCurrentLevel(sessionsDB.getSession(choosenSave).getCurrentLevel());

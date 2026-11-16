@@ -31,18 +31,18 @@ public class GameMenu extends Application {
         Button btnSaves = createButton("Sesiones");
         Button btnLeave = createButton("Salir");
 
-        btnPlay.setOnAction(e -> {
+        btnPlay.setOnAction(_ -> {
             new GameLevel(lM).start(primaryStage);
         });
 
-        btnSaves.setOnAction(e -> {
+        btnSaves.setOnAction(_ -> {
             System.out.println("Abriendo menú de sesiones...");
             new SessionMenu().mostrarSesiones(primaryStage, lM, () -> {
                 this.start(primaryStage); 
                 });
         });
 
-        btnLeave.setOnAction(e -> primaryStage.close());
+        btnLeave.setOnAction(_ -> primaryStage.close());
 
         VBox menu = new VBox(20);
         menu.setAlignment(Pos.CENTER);
@@ -68,12 +68,12 @@ public class GameMenu extends Application {
     					"-fx-text-fill: black; " +
     					"-fx-background-radius: 8;"
     			);
-    	btn.setOnMouseEntered(e -> btn.setStyle(
+    	btn.setOnMouseEntered(_ -> btn.setStyle(
     			"-fx-background-color: #5fcde4; " +
     					"-fx-text-fill: black; " +
     					"-fx-background-radius: 8;"
     			));
-    	btn.setOnMouseExited(e -> btn.setStyle(
+    	btn.setOnMouseExited(_ -> btn.setStyle(
     			"-fx-background-color: #639bff; " +
     					"-fx-text-fill: black; " +
     					"-fx-background-radius: 8;"
