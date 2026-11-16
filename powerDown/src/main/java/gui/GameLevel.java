@@ -110,23 +110,33 @@ public class GameLevel extends Application{
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+		    floorTile = cargarImagen("/tiles/tile1.png");
+		    playerSprite = cargarImagen("/player/puerro_boy.png");
+		    vacuumSprite = cargarImagen("/vacuum/vacuum.png");
+		    laptopSprite = cargarImagen("/laptop/laptop.png");
 		    floorTile = cargarImagen("/tile1.png");
 		    playerSprite = cargarImagen("/puerro_boy.png");
 		    vacuumSprite = cargarImagen("/vacuum.png");
 		    laptopSprite = cargarImagen("/laptop.png");
 		    
 		    for(int i = 0; i < 6; i++) {
+		        explosion[i] = cargarImagen("/explosion/explosion" + (i + 1) + ".png");
 		        explosion[i] = cargarImagen("/explosion" + (i + 1) + ".png");
 		    }
-		    
+
+		    toastSprite = cargarImagen("/projectiles/toast.png");
+		    fireSprite = cargarImagen("/projectiles/fire.png");
+		    frozenSprite = cargarImagen("/effect/frozen.png");
+		    iceSprite = cargarImagen("/projectiles/ice.png");
+		    windSprite = cargarImagen("/projectiles/wind.png");
 		    toastSprite = cargarImagen("/toast.png");
 		    fireSprite = cargarImagen("/fire.png");
 		    frozenSprite = cargarImagen("/frozen.png");
 		    iceSprite = cargarImagen("/ice.png");
 		    windSprite = cargarImagen("/wind.png");
 		    
-		    longWire[0] = cargarImagen("/wires/longwire1.png");
 		    longWire[1] = cargarImagen("/wires/longwire2.png");
+		    longWire[0] = cargarImagen("/wires/longwire1.png");
 		    
 		    for(int i = 0; i < 4; i++) {
 		        // ¡OJO ACÁ! Si tus archivos empiezan en 1 (ej: shortwire1.png), 
