@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="exceptions.IdOutOfBoundsException"/>
+    <fullyQualifiedTypeName name="exceptions.InactiveSessionException"/>
+    <fullyQualifiedTypeName name="exceptions.SessionNotFoundException"/>
+    <fullyQualifiedTypeName name="gui.GameMenu"/>
+    <fullyQualifiedTypeName name="map.Levels"/>
+    <fullyQualifiedTypeName name="exceptions.InvalidInputException"/>
+    <fullyQualifiedTypeName name="java.lang.String"/>
+</qualifiedTypeNameHistroy>
