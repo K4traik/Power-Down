@@ -7,4 +7,5 @@
     <fullyQualifiedTypeName name="map.Levels"/>
     <fullyQualifiedTypeName name="exceptions.InvalidInputException"/>
     <fullyQualifiedTypeName name="java.lang.String"/>
+    <fullyQualifiedTypeName name="gui.ProblemWindow"/>
 </qualifiedTypeNameHistroy>

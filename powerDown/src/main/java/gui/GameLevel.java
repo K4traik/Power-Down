@@ -19,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -103,7 +104,11 @@ public class GameLevel extends Application{
 	private Image cargarImagen(String path) {
 	    var stream = getClass().getResourceAsStream(path);
 	    if (stream == null) {
-	        System.out.println("❌ NO SE ENCONTRÓ EL ARCHIVO: " + path);
+	        try {
+				new ProblemWindow("Error en la carga de archivos", "Archivo no encontrado: " + path).start(new Stage());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 	    }
 	    return new Image(stream);
 	}
@@ -129,20 +134,23 @@ public class GameLevel extends Application{
 		    longWire[0] = cargarImagen("/wires/longwire1.png");
 		    
 		    for(int i = 0; i < 4; i++) {
-		        // ¡OJO ACÁ! Si tus archivos empiezan en 1 (ej: shortwire1.png), 
-		        // usar 'i' tirará error cuando i = 0 porque buscará "shortwire0.png".
 		        shortWire[i] = cargarImagen("/wires/shortwire" + (i + 1) + ".png");
 		        curvedWire[i] = cargarImagen("/wires/curvedwire" + (i + 1) + ".png");
 		        toasterSprite[i] = cargarImagen("/toaster/toaster" + (i + 1) + ".png");
 		        ovenSprite[i] = cargarImagen("/oven/oven" + (i + 1) + ".png");
-		        fanSprite[i] = cargarImagen("/fan/fan" + (i + 1) + ".png"); // ¿Estaba dentro de una carpeta /fan/?
+		        fanSprite[i] = cargarImagen("/fan/fan" + (i + 1) + ".png");
 		        fridgeSprite[i] = cargarImagen("/fridge/fridge" + (i + 1) + ".png");
 		    }
 		} catch (Exception e) {
 		    System.out.println("Error al cargar una imagen: " + e.getMessage());
-		    e.printStackTrace(); // Esto te mostrará la línea exacta donde falló
 		}
 		lM.start();
+		
+		Label turnos = new Label("Turno: 0");
+		turnos.setFont(new Font("Roboto", 16));
+        turnos.setStyle(
+            "-fx-text-fill: white; "
+        );
 		
 		Button btnGoBack = createButton("Volver");
 		
@@ -193,7 +201,7 @@ public class GameLevel extends Application{
 		
 		VBox menu = new VBox(20);
         menu.setAlignment(Pos.BOTTOM_CENTER);
-        menu.getChildren().add(btnGoBack);
+        menu.getChildren().addAll(turnos, btnGoBack);
 
         StackPane root = new StackPane();
         root.setStyle("-fx-background-color: #222034;");
@@ -248,13 +256,12 @@ public class GameLevel extends Application{
            		}
            		
            		gc.clearRect(0, 0, 320, 320);
+           		turnos.setText("Turno: " + lM.getTurn());
            		drawMap(gc);
            		drawWires(gc);
            		drawAppliances(gc);
             	drawPlayer(gc);
             	drawExplosions(gc);
-            	
-            	System.out.println("Turno actual: " + lM.getTurn());
             }
         });
 	}

@@ -2,8 +2,10 @@ package gui;
 
 import javafx.application.Application;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.SVGPath;
@@ -17,6 +19,10 @@ public class ProblemWindow extends Application {
 	public ProblemWindow(String title, String text) {
 		setTitle(title);
 		setText(text);
+	}
+	public ProblemWindow() {
+		setTitle("Default Title");
+		setText("Default text");
 	}
 	
 	@Override
@@ -32,11 +38,18 @@ public class ProblemWindow extends Application {
 		Label realText = new Label(text);
 		realText.setFont(new Font("Arial", 11));
 		
-		SVGPath warningIcon = createWarningIcon(1.0);
-		
 		VBox window = new VBox(5);
 		window.setAlignment(Pos.CENTER);
-		window.getChildren().addAll(realTitle, warningIcon, btnAccept);
+		window.getChildren().addAll(realTitle, realText, btnAccept);
+		
+		StackPane root = new StackPane();
+        root.setStyle("-fx-background-color: #ffffff;");
+        root.getChildren().add(window);
+
+        Scene scene = new Scene(root, 400, 200);
+        primaryStage.setTitle("PowerDown");
+        primaryStage.setScene(scene);
+        primaryStage.show();
 	}
 	
 	private Button createButton(String text) {
@@ -45,19 +58,25 @@ public class ProblemWindow extends Application {
     	btn.setPrefHeight(40);
     	btn.setFont(new Font("Roboto", 16));
     	btn.setStyle(
-    			"-fx-background-color: #5b6ee1; " +
+    			"-fx-background-color: white; " +
     					"-fx-text-fill: black; " +
-    					"-fx-background-radius: 8;"
+    					"-fx-background-radius: 8;" +
+    					"-fx-border-color: black;" +
+    					"-fx-border-width: 2;"
     			);
     	btn.setOnMouseEntered(e -> btn.setStyle(
-    			"-fx-background-color: #5fcde4; " +
+    			"-fx-background-color: gray; " +
     					"-fx-text-fill: black; " +
-    					"-fx-background-radius: 8;"
+    					"-fx-background-radius: 8;" +
+    					"-fx-border-color: black;" +
+    					"-fx-border-width: 2;"
     			));
     	btn.setOnMouseExited(e -> btn.setStyle(
-    			"-fx-background-color: #639bff; " +
+    			"-fx-background-color: white; " +
     					"-fx-text-fill: black; " +
-    					"-fx-background-radius: 8;"
+    					"-fx-background-radius: 8;" +
+    					"-fx-border-color: black;" +
+    					"-fx-border-width: 2;"
     			));
     	return btn;
     }
@@ -86,4 +105,5 @@ public class ProblemWindow extends Application {
 	public void setText(String text) {
 		this.text = text;
 	}
+
 }

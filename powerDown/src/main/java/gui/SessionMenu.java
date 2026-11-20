@@ -29,18 +29,15 @@ public class SessionMenu extends Application{
         
         
         btnLoad1.setOnAction(e -> {
-            System.out.println("Cargando partida 1...");
             lM.updateCurrentLevel(1);
             new GameMenu(lM).start(ventana);
         });
         
         btnSave1.setOnAction(e -> {
-            System.out.println("Guardando en partida 1...");
             lM.saveCurrentLevel(1);
         });
         
         btnDelete1.setOnAction(e -> {
-            System.out.println("Eliminando partida 1...");
             lM.deleteSession(1);
         });
         

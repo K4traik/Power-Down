@@ -3,6 +3,8 @@ package service;
 import dao.SessionProgressionDao;
 import daoimpl.SessionProgressionDaoImpl;
 import exceptions.*;
+import gui.ProblemWindow;
+import javafx.stage.Stage;
 import model.SessionProgression;
 
 public class SessionProgressionService {
@@ -20,16 +22,29 @@ public class SessionProgressionService {
 			return null;
 		}catch(SessionNotFoundException ex) {
 			try{
+				try {
+					new ProblemWindow("Error", ex.getMessage()).start(new Stage());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				saveSession(1, 1);
 			}catch(InvalidLevelException ex1) {
-				System.out.println(ex1.getMessage());
+				try {
+					new ProblemWindow("Error", ex1.getMessage()).start(new Stage());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 			return new SessionProgression(1, 1);
 		}catch(InactiveSessionException ex) {
 			try{
 				saveSession(1, 1);
 			}catch(InvalidLevelException ex1) {
-				System.out.println(ex1.getMessage());
+				try {
+					new ProblemWindow("Error", ex1.getMessage()).start(new Stage());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 			return new SessionProgression(1, 1);
 		}
@@ -48,26 +63,32 @@ public class SessionProgressionService {
 		}
 		return s;
 	}
-	public void turnOffSession(int id) throws AlreadyInactiveException{
+	public void turnOffSession(int id){
 		try {
 			SessionProgression s = getSession(id);
-			if(!s.isActive()) {
-				throw new AlreadyInactiveException("La sesión de id " + id + " no se puede eliminar porque ya está inactiva.");
-			}
-			sessionProgressionDao.delete(id);
+			sessionProgressionDao.delete(s.getId());
 		}catch(IdOutOfBoundsException ex) {
-			System.out.println(ex.getMessage());
+			try {
+				new ProblemWindow("Error", ex.getMessage()).start(new Stage());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}catch(SessionNotFoundException ex) {
 			try {
+				try {
+					new ProblemWindow("Error", ex.getMessage()).start(new Stage());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				saveSession(id, 1);
 			}catch(InvalidLevelException ex2) {
 				ex2.printStackTrace();
 			}
-		}catch(InactiveSessionException ex2) {
+		}catch(InactiveSessionException ex) {
 			try {
-				saveSession(id, 1);
-			}catch(InvalidLevelException ex) {
-				ex2.printStackTrace();
+				new ProblemWindow("Error", ex.getMessage()).start(new Stage());
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 	}
@@ -81,11 +102,19 @@ public class SessionProgressionService {
 			s.setCurrentLevel(currentLevel);
 			sessionProgressionDao.update(s);
 		}catch(IdOutOfBoundsException ex) {
-			System.out.println(ex.getMessage());
+			try {
+				new ProblemWindow("Error", ex.getMessage()).start(new Stage());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}catch(SessionNotFoundException ex) {
 			sessionProgressionDao.create(new SessionProgression(id, currentLevel));
 		}catch(InactiveSessionException ex) {
-			System.out.println(ex.getMessage());
+			try {
+				new ProblemWindow("Aviso", ex.getMessage() + " Actualizandola al nivel 1.").start(new Stage());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			sessionProgressionDao.update(new SessionProgression(id, currentLevel));
 		}
 	}

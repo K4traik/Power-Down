@@ -3,7 +3,6 @@ package levelmanager;
 import entity.Appliance;
 import entity.Human;
 import entity.Wires;
-import exceptions.AlreadyInactiveException;
 import exceptions.IdOutOfBoundsException;
 import exceptions.InactiveSessionException;
 import exceptions.InvalidLevelException;
@@ -80,7 +79,6 @@ public class LevelManager{
 			}
 			if(nextPos!=null) {
 				if (!checkPositionMap(nextPos)) {
-					System.out.println("muro");
 					player.move(player.getPosition());
 				}else if (checkPositionAppliances(nextPos)) {
 					System.out.println("appliance");
@@ -91,6 +89,7 @@ public class LevelManager{
 						if(wire.getAppliance().isActive()) {
 							level.addExplosion(wire.getAppliance().getPosition());
 							wire.steppedOn();
+							level.getAppliances().remove(wire.getAppliance());
 						}
 					}
 					player.move(nextPos);
@@ -144,11 +143,7 @@ public class LevelManager{
 		}
 		
 		public void deleteSession(int id) {
-			try {
-				sessionsDB.turnOffSession(id);
-			} catch (AlreadyInactiveException ex) {
-				ex.printStackTrace();
-			}
+			sessionsDB.turnOffSession(id);
 		}
 		
 	public void updateCurrentLevel(int choosenSave) {
